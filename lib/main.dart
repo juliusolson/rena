@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rena/utils/destination.dart';
 import 'package:rena/screens/views.dart';
+import 'package:rena/theme/style.dart';
 
 void main() {
   runApp(RenaApp());
@@ -11,12 +12,9 @@ class RenaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Rena',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Nav()
+      title: "Rena",
+      home: Nav(),
+      theme: appTheme(),
     );
   }
 }
@@ -38,10 +36,14 @@ class _NavState extends State<Nav> {
   Widget build(BuildContext context) {
   
     return Scaffold(
-      backgroundColor: Colors.amber,
       appBar: AppBar(
-        title: Text("asdasd"),
-        backgroundColor: Colors.grey,
+        title: Text("Rena", 
+          style: TextStyle(fontFamily: "Renogare"),
+        ),
+        actions: [
+          Icon(Icons.settings),
+        ],
+
       ),
       body: SafeArea(
         top: false,
@@ -51,13 +53,15 @@ class _NavState extends State<Nav> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.red,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
         currentIndex: _currentIndex,
         onTap: (int idx) => setState(() => _currentIndex = idx),
         items: allDestinations.map((Destination dest) {
             return BottomNavigationBarItem(
               icon: Icon(dest.icon),
-              backgroundColor: Colors.red,
               label: dest.title,
             );
           }).toList(),

@@ -9,10 +9,10 @@ class HomeView extends StatelessWidget{
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.greenAccent,
       body: Center(
       child: Text(
           this.str,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
     ),
     );

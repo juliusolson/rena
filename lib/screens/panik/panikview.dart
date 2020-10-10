@@ -9,13 +9,13 @@ class PanikView extends StatelessWidget{
   PanikView(this.str);
 
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
+    return Scaffold(
+      body: Center(
+      child: Text(
           this.str,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
-      ],
+    ),
     );
   }
 
