@@ -20,9 +20,9 @@ class HomeView extends StatelessWidget {
         child: Center(
       child: Column(children: <Widget>[
         Flexible(
-          flex: 2,
+          flex: 1,
           child: Container(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.only(left:20, right:20),
             child: ListView.separated(
               physics: BouncingScrollPhysics(),
               itemCount: weeks.length,
@@ -68,11 +68,36 @@ class HomeView extends StatelessWidget {
               child: SpendingsBarChart.withSampleData(),
             )),
         Flexible(
-            flex: 4,
-            child: Container(
-                  child: SpendingsPieChart.withSampleData(),
+          flex: 4,
+          child: Stack(children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Text(
+                "Utgifter",
+                style: Theme.of(context).textTheme.bodyText1,
                 ),
+              ),
             ),
+            Container(
+              child: SpendingsPieChart.withSampleData(),
+            ),
+            Align(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                Text(
+                  "100 kr",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  "spel",
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ]))
+          ]),
+        ),
       ]),
     ));
   }

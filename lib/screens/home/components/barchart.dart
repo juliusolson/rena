@@ -12,7 +12,7 @@ class SpendingsBarChart extends StatelessWidget {
   factory SpendingsBarChart.withSampleData() {
     return new SpendingsBarChart(
       _createSampleData(),
-      animate: false,
+      animate: true,
     );
   }
 

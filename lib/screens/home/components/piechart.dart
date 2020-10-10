@@ -11,7 +11,7 @@ class SpendingsPieChart extends StatelessWidget {
   factory SpendingsPieChart.withSampleData() {
     return new SpendingsPieChart(
       _createSampleData(),
-      animate: false,
+      animate: true,
     );
   }
 
@@ -28,7 +28,7 @@ class SpendingsPieChart extends StatelessWidget {
   /// Create one series with sample hard coded data.
   static List<charts.Series<SpendingCategory, int>> _createSampleData() {
     final data = [
-      new SpendingCategory(100, 0,"Housing", "#ED1E79"),
+      new SpendingCategory(10, 0,"Housing", "#ED1E79"),
       new SpendingCategory(50, 1, "Food", "#FBAE17"),
       new SpendingCategory(20, 2, "Entertainment", "#F15A24"),
       new SpendingCategory(10, 3, "Transportation", "#7EC5FF"),
