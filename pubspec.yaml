@@ -66,7 +66,10 @@ flutter:
         - asset: fonts/Montserrat-Medium.ttf
         - asset: fonts/Montserrat-Italic.ttf
           style: italic
-        - asset: fonts/Montserrat-Bold.ttf 
+        - asset: fonts/Montserrat-Bold.ttf
+    - family: Renogare
+      fonts:
+        - asset: fonts/Renogare-Regular.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
