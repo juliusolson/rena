@@ -13,6 +13,11 @@ ThemeData appTheme() {
         fontSize: 30,
         color: Colors.white,
         fontFamily: "Montserrat",
+      ),
+      caption: TextStyle(
+        fontFamily: "Montserrat",
+        fontSize: 18,
+        color: Colors.white,
       )
     )     
   );
