@@ -69,34 +69,7 @@ class HomeView extends StatelessWidget {
             )),
         Flexible(
           flex: 4,
-          child: Stack(children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(
-                "Utgifter",
-                style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ),
-            ),
-            Container(
-              child: SpendingsPieChart.withSampleData(),
-            ),
-            Align(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                Text(
-                  "100 kr",
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-                Text(
-                  "spel",
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ]))
-          ]),
+          child: SpendingsPieChart.withSampleData(),
         ),
       ]),
     ));
