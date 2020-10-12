@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rena/screens/home/components/horizontalScrollSelector.dart';
 import 'components/barchart.dart';
 import 'components/piechart.dart';
 
@@ -6,9 +7,9 @@ const List<String> weeks = [
   "Vecka 41",
   "Vecka 42",
   "Vecka 43",
-  "Vecka 41",
-  "Vecka 42",
-  "Vecka 43"
+  "Vecka 44",
+  "Vecka 45",
+  "Vecka 46"
 ];
 
 class HomeView extends StatelessWidget {
@@ -20,26 +21,10 @@ class HomeView extends StatelessWidget {
         child: Center(
       child: Column(children: <Widget>[
         Flexible(
-          flex: 1,
-          child: Container(
-            padding: EdgeInsets.only(left:20, right:20),
-            child: ListView.separated(
-              physics: BouncingScrollPhysics(),
-              itemCount: weeks.length,
-              separatorBuilder: (BuildContext ctx, int index) =>
-                  SizedBox(width: 40),
-              itemBuilder: (BuildContext ctx, int index) {
-                return Center(
-                    child: Container(
-                        child: Text(
-                  weeks[index],
-                  style: Theme.of(context).textTheme.bodyText1,
-                )));
-              },
-              scrollDirection: Axis.horizontal,
-            ),
-          ),
-        ),
+            flex: 1,
+            child: Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: HorizontalScrollSelector(weeks))),
         Flexible(
           flex: 2,
           child: Container(
