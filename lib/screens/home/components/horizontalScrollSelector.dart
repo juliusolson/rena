@@ -4,7 +4,7 @@ import '../../../models/spending.dart';
 import 'package:provider/provider.dart';
 
 class HorizontalScrollSelector extends StatefulWidget {
-  List<String> elements;
+  final List<String> elements;
   HorizontalScrollSelector(this.elements);
   @override
   _HorizontalScrollSelectorState createState() =>
@@ -12,7 +12,14 @@ class HorizontalScrollSelector extends StatefulWidget {
 }
 
 class _HorizontalScrollSelectorState extends State<HorizontalScrollSelector> {
-  int _selectedIndex = 0;
+  int _selectedIndex;
+  // Init by selecting most recent item i.e. the last
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.elements.length-1;
+  }
+
   @override
   Widget build(BuildContext context) {
     TextStyle themeActive = Theme.of(context).textTheme.bodyText1;
