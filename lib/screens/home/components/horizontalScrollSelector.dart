@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/spending.dart';
+import 'package:provider/provider.dart';
+
 class HorizontalScrollSelector extends StatefulWidget {
   List<String> elements;
   HorizontalScrollSelector(this.elements);
@@ -16,23 +19,23 @@ class _HorizontalScrollSelectorState extends State<HorizontalScrollSelector> {
     TextStyle themeNotActive =
         themeActive.copyWith(color: Theme.of(context).accentColor);
     return ListView.builder(
-      physics: PageScrollPhysics(),
-      itemCount: widget.elements.length,
-      itemBuilder: (BuildContext ctx, int index) {
-        return Center(
-            child: Container(
-                child: TextButton(
-                    child: Text(widget.elements[index],
-                        style: (this._selectedIndex != index)
-                            ? themeActive
-                            : themeNotActive),
-                    onPressed: () => _selected(index))));
-      },
-      scrollDirection: Axis.horizontal,
-    );
+        physics: PageScrollPhysics(),
+        itemCount: widget.elements.length,
+        itemBuilder: (BuildContext ctx, int index) {
+          return Center(
+              child: Container(
+                  child: TextButton(
+                      child: Text(widget.elements[index],
+                          style: (this._selectedIndex != index)
+                              ? themeActive
+                              : themeNotActive),
+                      onPressed: () => _selected(context, index))));
+        },
+        scrollDirection: Axis.horizontal);
   }
 
-  void _selected(int index) {
+  void _selected(BuildContext context, int index) {
+    Provider.of<WeeklySpendingModel>(context, listen: false).changeWeek(index);
     setState(() {
       _selectedIndex = index;
     });
