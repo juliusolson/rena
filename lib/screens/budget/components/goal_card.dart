@@ -30,11 +30,11 @@ class GoalCard extends StatelessWidget {
             backgroundColor: Colors.grey,
             clipLinearGradient: true,
             linearGradient: LinearGradient(colors: [
-              createMaterialColor(Color(0xffed1e79)), // rosa
-              createMaterialColor(Color(0xfff15a24)), // orange
-              createMaterialColor(Color(0xfffbae17)), //gul
-              createMaterialColor(Color(0xff7ec5ff)), //blå
-              createMaterialColor(Color(0xff8333ff)), //lila
+              chartColors["pink"],
+              chartColors["orange"],
+              chartColors["yellow"],
+              chartColors["blue"],
+              chartColors["purple"],
             ]),
           ),
         ],
