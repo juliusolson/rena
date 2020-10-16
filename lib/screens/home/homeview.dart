@@ -4,15 +4,8 @@ import '../../models/spending.dart';
 import 'components/barchart.dart';
 import 'components/piechart.dart';
 import 'package:provider/provider.dart';
-
-// const List<String> weeks = [
-//   "Vecka 41",
-//   "Vecka 42",
-//   "Vecka 43",
-//   "Vecka 44",
-//   "Vecka 45",
-//   "Vecka 46"
-// ];
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:rena/utils/colors.dart';
 
 class HomeView extends StatelessWidget {
   final String str;
@@ -23,7 +16,9 @@ class HomeView extends StatelessWidget {
         child: Center(
             child: ChangeNotifierProvider(
       create: (context) => WeeklySpendingModel(),
-      child: Column(children: <Widget>[
+      child:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <
+              Widget>[
         Flexible(
             flex: 1,
             child: Container(
@@ -50,15 +45,20 @@ class HomeView extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyText1,
                     );
                   }),
-                  Divider(
-                    color: Colors.grey,
-                    thickness: 10.0,
-                  ),
+                  Consumer<WeeklySpendingModel>(
+                      builder: (context, model, child) {
+                    return LinearPercentIndicator(
+                      lineHeight: 10.0,
+                      percent: model.spending/500.0,
+                      backgroundColor: Colors.grey,
+                      progressColor: createMaterialColor(Color(0xfffed1e79)),
+                    );
+                  }),
                 ]),
           ),
         ),
         Flexible(
-            flex: 3,
+            flex: 2,
             child: Container(
               child: SpendingsBarChart.withSampleData(),
             )),

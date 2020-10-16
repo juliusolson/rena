@@ -29,7 +29,9 @@ class WeeklySpendingModel extends ChangeNotifier {
   List<SpendingCategory> currentCategories;
   WeeklySpendingModel() {
     data = DummyData(5);
-    currentCategories = data.week2spending[40];
+    currentCategories = data.week2spending[44];
+    this.week = 44;
+    this.spending = data.week2spending[this.week][0].amount;
     notifyListeners();
   }
   void changeWeek(int weekIndex) {
