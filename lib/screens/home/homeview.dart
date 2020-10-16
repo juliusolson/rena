@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rena/screens/home/components/horizontalScrollSelector.dart';
-import '../../models/spending.dart';
+import 'package:rena/models/spending.dart';
 import 'components/barchart.dart';
 import 'components/piechart.dart';
 import 'package:provider/provider.dart';
