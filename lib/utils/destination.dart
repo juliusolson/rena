@@ -10,6 +10,7 @@ class Destination {
 
 const List<Destination> allDestinations = <Destination>[
   Destination("Home", Icons.home, Colors.teal),
+  Destination("Budget", Icons.attach_money, Colors.red),
   Destination("Profile", Icons.person, Colors.red),
   Destination("Panik", Icons.warning, Colors.green),
 ];
