@@ -8,19 +8,13 @@ class SpendingsPieChart extends StatefulWidget {
 
   SpendingsPieChart(this.seriesList, {this.animate});
 
-  factory SpendingsPieChart.withSampleData() {
-    return new SpendingsPieChart(
-      _createSampleData(),
-      animate: true,
-    );
-  }
   factory SpendingsPieChart.customSampleData(List<SpendingCategory> data) {
     debugPrint(data.toString());
     return new SpendingsPieChart([
       new charts.Series<SpendingCategory, int>(
-        id: 'Sales',
-        domainFn: (SpendingCategory sales, _) => sales.n,
-        measureFn: (SpendingCategory sales, _) => sales.amount,
+        id: 'categories',
+        domainFn: (SpendingCategory sc, _) => sc.n,
+        measureFn: (SpendingCategory sc, _) => sc.amount,
         data: data,
         colorFn: (SpendingCategory sc, _) =>
             charts.Color.fromHex(code: sc.color),
@@ -30,28 +24,6 @@ class SpendingsPieChart extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => new _SpendingsPieChartState();
-
-  /// Create one series with sample hard coded data.
-  static List<charts.Series<SpendingCategory, int>> _createSampleData() {
-    final data = [
-      new SpendingCategory(10, 0, "Housing", "#ED1E79"),
-      new SpendingCategory(50, 1, "Food", "#FBAE17"),
-      new SpendingCategory(20, 2, "Entertainment", "#F15A24"),
-      new SpendingCategory(10, 3, "Transportation", "#7EC5FF"),
-      new SpendingCategory(14, 4, "Misc", "#8333FF"),
-    ];
-
-    return [
-      new charts.Series<SpendingCategory, int>(
-        id: 'Sales',
-        domainFn: (SpendingCategory sales, _) => sales.n,
-        measureFn: (SpendingCategory sales, _) => sales.amount,
-        data: data,
-        colorFn: (SpendingCategory sc, _) =>
-            charts.Color.fromHex(code: sc.color),
-      )
-    ];
-  }
 }
 
 class _SpendingsPieChartState extends State<SpendingsPieChart> {
