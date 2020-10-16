@@ -44,16 +44,6 @@ class _SpendingsPieChartState extends State<SpendingsPieChart> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      Align(
-        alignment: Alignment.topLeft,
-        child: Container(
-          padding: EdgeInsets.only(left: 10),
-          child: Text(
-            "Utgifter",
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-        ),
-      ),
       Container(
           child: new charts.PieChart(
         widget.seriesList,
