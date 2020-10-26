@@ -17,14 +17,15 @@ class _HorizontalScrollSelectorState extends State<HorizontalScrollSelector> {
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.elements.length-1;
+    _selectedIndex = widget.elements.length - 1;
   }
 
   @override
   Widget build(BuildContext context) {
     TextStyle themeActive = Theme.of(context).textTheme.bodyText1;
-    TextStyle themeNotActive =
-        themeActive.copyWith(color: Theme.of(context).accentColor);
+    TextStyle themeNotActive = themeActive.copyWith(
+        color: Theme.of(context).accentColor,
+        decoration: TextDecoration.underline);
     return ListView.builder(
         physics: PageScrollPhysics(),
         itemCount: widget.elements.length,

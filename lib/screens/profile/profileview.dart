@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rena/models/scoreBoard.dart';
+import 'package:rena/screens/profile/components/pins.dart';
 import 'package:rena/screens/profile/components/topList.dart';
 
 class ProfileView extends StatelessWidget {
@@ -31,7 +32,9 @@ class ProfileView extends StatelessWidget {
                 'Pins',
                 style: Theme.of(context).textTheme.bodyText1,
               )),
-          Flexible(child: null)
+          Flexible(
+              flex: 10,
+              child: Pins(['Streaks', 'Sparmål', 'Interaktion', 'Övrigt']))
         ]),
       ),
     );
