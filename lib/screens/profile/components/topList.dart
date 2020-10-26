@@ -47,36 +47,22 @@ class _HighScoreListState extends State<HighScoreList> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: Theme.of(context).colorScheme.background,
+              color: Colors
+                  .indigo[100], //Theme.of(context).colorScheme.background,
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: ListView.builder(
                   itemCount: widget.users.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Row(children: [
-                      Expanded(
-                          flex: 1,
-                          child: Text('${index + 1}.',
-                              style: Theme.of(context).textTheme.bodyText1)),
-                      Expanded(flex: 1, child: Icon(Icons.account_circle)),
-                      Expanded(
-                          flex: 4,
-                          child: Text('${widget.users[index].name}',
-                              style: Theme.of(context).textTheme.bodyText1)),
-                      Expanded(
-                          flex: 1,
-                          child: Text(
-                              '${widget.users[index].getCategory(_selectedIndex)}',
-                              style: Theme.of(context).textTheme.bodyText1)),
-                      Expanded(
-                          flex: 1,
-                          child: Text('\u{1F4AA}',
-                              style: Theme.of(context).textTheme.bodyText1))
-                    ]);
+                    return HighScoreEntry(
+                        widget.users[index], index, (index == 0));
                   })))
     ]);
   }
 
   void _selectSorting(int index) {
+    widget.users.forEach((element) {
+      element.setDisplayedCategory(index);
+    });
     if (index % 2 == 0) {
       widget.users.sort((a, b) {
         return b.gamblingFreeDays.compareTo(a.gamblingFreeDays);
@@ -89,5 +75,43 @@ class _HighScoreListState extends State<HighScoreList> {
     setState(() {
       this._selectedIndex = index;
     });
+  }
+}
+
+class HighScoreEntry extends StatelessWidget {
+  ProfileEntry user;
+  bool currentUser;
+  int index;
+  HighScoreEntry(this.user, this.index, this.currentUser);
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        color: currentUser ? Colors.indigo[100] : Colors.blueGrey[100],
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        child: Row(children: [
+          Expanded(
+              flex: 1,
+              child: Text('${index + 1}.',
+                  style: Theme.of(context).textTheme.bodyText1)),
+          Expanded(
+              flex: 1,
+              child: CircleAvatar(
+                  backgroundColor: user.color,
+                  child: Text(user.getStringAvatar()))),
+          Expanded(
+              flex: 4,
+              child: Text('${user.name}',
+                  style: Theme.of(context).textTheme.bodyText1)),
+          Expanded(
+              flex: 1,
+              child: Text('${user.getDisplayedCategory()}',
+                  style: Theme.of(context).textTheme.bodyText1)),
+          Expanded(
+              flex: 1,
+              child: currentUser
+                  ? Text('')
+                  : Text('\u{1F4AA}',
+                      style: Theme.of(context).textTheme.bodyText1))
+        ]));
   }
 }

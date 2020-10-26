@@ -1,24 +1,34 @@
 import 'dart:math';
-
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ProfileEntry {
   String name;
   int gamblingFreeDays;
   int numberOfPins;
+  int displayedScore = 0;
+  Color color = Colors.lightBlue;
   ProfileEntry(this.name, this.gamblingFreeDays, this.numberOfPins);
 
   String toString() {
-    return '${name}| ${gamblingFreeDays} ${numberOfPins}';
+    return '$name| $gamblingFreeDays $numberOfPins';
   }
 
   //To be Removed. Ugly hack to easily change presented value when changing sorting mode of  high score
-  int getCategory(int index) {
+  int getDisplayedCategory() {
+    return displayedScore;
+  }
+
+  void setDisplayedCategory(int index) {
     if (index == 0) {
-      return gamblingFreeDays;
+      displayedScore = gamblingFreeDays;
     } else {
-      return numberOfPins;
+      displayedScore = numberOfPins;
     }
+  }
+
+  String getStringAvatar() {
+    return name[0];
   }
 }
 
@@ -35,6 +45,14 @@ class ProfileDummyData extends ChangeNotifier {
     'Carl',
     'Emma'
   ];
+  static final List<Color> colors = [
+    Colors.black,
+    Colors.lightBlue,
+    Colors.blue,
+    Colors.green,
+    Colors.yellow,
+    Colors.orange
+  ];
   List<ProfileEntry> userProfiles;
 
   ProfileDummyData(int numberOfUsers) {
@@ -49,6 +67,7 @@ class ProfileDummyData extends ChangeNotifier {
     for (var i = 0; i < numberOfUsers; i++) {
       String name = usernames[rng.nextInt(usernames.length)];
       users[i] = new ProfileEntry(name, rng.nextInt(100), rng.nextInt(30));
+      users[i].color = colors[rng.nextInt(colors.length)];
     }
     return users;
   }

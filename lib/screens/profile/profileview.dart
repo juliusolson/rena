@@ -26,11 +26,12 @@ class ProfileView extends StatelessWidget {
                     return HighScoreList(value.userProfiles);
                   }))),
           Flexible(
-              flex: 10,
+              flex: 1,
               child: Text(
                 'Pins',
                 style: Theme.of(context).textTheme.bodyText1,
-              ))
+              )),
+          Flexible(child: null)
         ]),
       ),
     );
