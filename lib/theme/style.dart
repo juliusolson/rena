@@ -16,9 +16,21 @@ ThemeData appTheme() {
       ),
       caption: TextStyle(
         fontFamily: "Montserrat",
-        fontSize: 18,
+        fontSize: 16,
         color: Colors.white,
-      )
+      ),
+      headline2: TextStyle(
+        fontFamily: "Montserrat",
+        fontSize: 30,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+      headline1: TextStyle(
+        fontFamily: "Montserrat",
+        fontSize: 34,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
     )     
   );
 }

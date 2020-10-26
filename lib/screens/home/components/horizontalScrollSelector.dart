@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/spending.dart';
+import 'package:rena/models/spending.dart';
 import 'package:provider/provider.dart';
 
 class HorizontalScrollSelector extends StatefulWidget {

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rena/screens/budget/components/budget_overview.dart';
+import 'package:rena/utils/colors.dart';
+import 'components/goal_card.dart';
 
 class BudgetView extends StatelessWidget {
   final String str;
@@ -12,78 +15,71 @@ class BudgetView extends StatelessWidget {
           children: [
             Flexible(
               flex: 2,
-              child: Container(
-                  color: Colors.blue,
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "Budgetar",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          TextButton(
-                              onPressed: null,
-                              child: Text(
-                                "Spar",
-                                style: Theme.of(context).textTheme.caption,
-                              )),
-                          TextButton(
-                              onPressed: null,
-                              child: Text(
-                                "Spel",
-                                style: Theme.of(context).textTheme.caption,
-                              )),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Spelat för",
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                          Text(
-                            "0 kr",
-                            style: Theme.of(context).textTheme.bodyText1,
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Kvar",
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                          Text(
-                            "150 kr",
-                            style: Theme.of(context).textTheme.bodyText1,
-                          )
-                        ],
-                      ),
-                      FlatButton(
-                        color: Colors.grey,
-                        textColor: Colors.white,
-                        disabledColor: Colors.grey,
-                        padding: EdgeInsets.all(8.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        onPressed: () {},
-                        child: Text(
-                          "Ändra fördelning",
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      )
-                    ],
-                  )),
+              child: BudgetOverview(),
             ),
             Flexible(
                 flex: 3,
-                child: Container(
-                  color: Colors.red,
-                ))
+                child: Column(children: [
+                  Flexible(
+                    flex: 1,
+                    child: Row(
+                      children: [
+                        Flexible(
+                            flex: 5,
+                            child: Container(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        "Treats",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Container(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Text("Dreams",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1))
+                                  ],
+                                ),
+                                subtitle:
+                                    Text("Mindre sparmål mellan 1-5000 kr"),
+                              ),
+                            )),
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            child: FloatingActionButton(
+                              child: Icon(Icons.add),
+                              onPressed: null,
+                              foregroundColor: Colors.white,
+                              backgroundColor:
+                                  createMaterialColor(Color(0xff00d3b3)),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 3,
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30, left: 10, right: 10),
+                      child: ListView.separated(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: 10,
+                        separatorBuilder: (BuildContext ctx, int index) =>
+                            SizedBox(height: 20),
+                        itemBuilder: (BuildContext ctx, int idx) => GoalCard(),
+                      ),
+                    ),
+                  )
+                ]))
           ],
         ),
       ),

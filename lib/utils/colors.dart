@@ -19,3 +19,11 @@ MaterialColor createMaterialColor(Color color) {
   });
   return MaterialColor(color.value, swatch);
 }
+
+Map<String, MaterialColor> chartColors = {
+  "pink": createMaterialColor(Color(0xffed1e79)), // rosa
+  "orange": createMaterialColor(Color(0xfff15a24)), // orange
+  "yellow": createMaterialColor(Color(0xfffbae17)), //gul
+  "blue": createMaterialColor(Color(0xff7ec5ff)), //blå
+  "purple": createMaterialColor(Color(0xff8333ff)), //lila
+};
