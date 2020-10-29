@@ -10,7 +10,7 @@ class Promises extends StatelessWidget {
               child: Text(
                 'Mina löften',
                 textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.headline1,
               ))),
       Flexible(
           flex: 4,
@@ -18,10 +18,7 @@ class Promises extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Text(
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(fontSize: 12),
+                style: Theme.of(context).textTheme.caption,
               )))
     ]);
   }

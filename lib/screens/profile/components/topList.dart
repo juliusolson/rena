@@ -20,10 +20,6 @@ class _HighScoreListState extends State<HighScoreList> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle themeActive = Theme.of(context).textTheme.bodyText1;
-    TextStyle themeNotActive =
-        themeActive.copyWith(color: Theme.of(context).accentColor);
-
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       Flexible(
           flex: 1,
@@ -34,8 +30,8 @@ class _HighScoreListState extends State<HighScoreList> {
                 return TextButton(
                   child: Text('${widget.categories[index]} ',
                       style: (this._selectedIndex != index)
-                          ? themeActive
-                          : themeNotActive),
+                          ? Theme.of(context).textTheme.headline2
+                          : Theme.of(context).textTheme.headline3),
                   onPressed: () {
                     _selectSorting(index);
                   },
