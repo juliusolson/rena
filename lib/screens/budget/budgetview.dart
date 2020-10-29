@@ -38,7 +38,6 @@ class _BudgetViewState extends State<BudgetView> {
   }
 
   void _select(BuildContext ctx, int index) {
-    debugPrint("hej");
     setState(() {
       _selectedIndex = index;
       _selectedCategory = widget.categories[index].type;

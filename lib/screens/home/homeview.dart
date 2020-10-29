@@ -79,10 +79,10 @@ class HomeView extends StatelessWidget {
                         FlatButton(
                             onPressed: null,
                             child: null,
-                            textColor: Colors.white,
+                            textColor: Theme.of(context).textTheme.bodyText1.color,
                             shape: CircleBorder(
                               side: BorderSide(
-                                  color: Colors.white,
+                                  color: Theme.of(context).textTheme.bodyText1.color,
                                   width: 1.5,
                                   style: BorderStyle.solid),
                             )),
@@ -91,7 +91,7 @@ class HomeView extends StatelessWidget {
                             child: IconButton(
                                 icon: Icon(
                                   Icons.bar_chart_outlined,
-                                  color: Colors.white,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                                 color: Colors.white,
                                 onPressed: null))
