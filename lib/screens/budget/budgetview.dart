@@ -2,13 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:rena/screens/budget/components/budget_overview.dart';
 import 'package:rena/utils/colors.dart';
 import 'components/goal_card.dart';
+import 'components/goal_creation.dart';
 
-class BudgetView extends StatelessWidget {
+class BudgetView extends StatefulWidget {
   final String str;
+  final List<String> categories =  <String>["Dreams", "Treats"];
 
   BudgetView(this.str);
 
+  @override 
+  _BudgetViewState createState() => _BudgetViewState();
+
+}
+
+class _BudgetViewState extends State<BudgetView> {
+  int _selectedIndex;
+
+  void initState() {
+    super.initState();
+    _selectedIndex = 0;
+  }
+
+  void _select(BuildContext ctx, int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    TextStyle themeInactive = Theme.of(context).textTheme.bodyText1;
+    TextStyle themeActive = themeInactive.copyWith(
+      decoration: TextDecoration.underline,
+      color: Theme.of(context).accentColor,
+    );
     return SafeArea(
       child: Center(
         child: Column(
@@ -23,40 +50,38 @@ class BudgetView extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Row(
+                      //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                            flex: 5,
-                            child: Container(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      child: Text(
-                                        "Treats",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1,
-                                      ),
-                                    ),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: Text("Dreams",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1))
-                                  ],
-                                ),
-                                subtitle:
-                                    Text("Mindre sparmål mellan 1-5000 kr"),
+                          flex: 2,
+                          child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: this.widget.categories.length,
+                          itemBuilder: (BuildContext ctx, int index) {
+                            return TextButton(
+                              child: Text(
+                                this.widget.categories[index],
+                                style: (this._selectedIndex == index)
+                                ? themeActive
+                                : themeInactive,
                               ),
-                            )),
+                              onPressed: () => _select(ctx, index),
+                              );
+                          },
+                        )),
                         Flexible(
                           flex: 1,
                           child: Container(
                             child: FloatingActionButton(
                               child: Icon(Icons.add),
-                              onPressed: null,
+                              onPressed: (){
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx2) {
+                                    return GoalCreation();
+                                  }
+                                );
+                              },
                               foregroundColor: Colors.white,
                               backgroundColor:
                                   createMaterialColor(Color(0xff00d3b3)),
