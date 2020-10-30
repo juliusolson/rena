@@ -10,12 +10,11 @@ class PinInfo extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Flexible(
-              flex: 1,
-              child: CloseButton(
-                color: Colors.blue,
-              )),
-          Flexible(flex: 4, child: Image(image: AssetImage(pinData.imageURL))),
+          Stack(children: [
+            Flexible(
+                flex: 4, child: Image(image: AssetImage(pinData.imageURL))),
+            Align(alignment: Alignment.topRight, child: CloseButton())
+          ]),
           Flexible(
               flex: 1,
               child: Text(pinData.title,
@@ -34,12 +33,13 @@ class PinInfo extends StatelessWidget {
                         .textTheme
                         .bodyText1
                         .copyWith(fontSize: 12)),
-                Text('Uppnådd ${pinData.dateAcquired}',
-                    textAlign: TextAlign.right,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(fontSize: 12, color: Colors.grey))
+                Align(
+                    alignment: Alignment.bottomRight,
+                    child: Text('Uppnådd ${pinData.dateAcquired}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(fontSize: 12, color: Colors.grey)))
               ]))
         ]));
   }
