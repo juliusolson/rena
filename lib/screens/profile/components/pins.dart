@@ -50,18 +50,31 @@ class _PinsState extends State<Pins> {
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
               itemBuilder: (BuildContext ctx, int index) {
-                return FlatButton(
-                    onPressed: () {
-                      debugPrint('$index Pressed');
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext ctx2) {
-                            return PinInfo(widget.pins[index]);
-                          });
-                    },
-                    child: Image.asset(widget.pins[index].imageURL));
+                return this.getPinWdiget(widget.pins[index]);
               }))
     ]);
+  }
+
+  Widget getPinWdiget(Pin pinData) {
+    Widget pinIcon, result;
+    if (pinData.isAcquied()) {
+      pinIcon = Image.asset(pinData.imageURL);
+      result = GestureDetector(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext ctx2) {
+                  return PinInfo(pinData);
+                });
+          },
+          child: pinIcon);
+    } else {
+      result = ColorFiltered(
+        colorFilter: ColorFilter.mode(Colors.grey, BlendMode.srcATop),
+        child: Image.asset(pinData.imageURL),
+      );
+    }
+    return result;
   }
 
   void _selected(BuildContext context, int index) {
