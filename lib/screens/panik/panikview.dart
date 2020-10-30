@@ -18,7 +18,7 @@ class PanikView extends StatelessWidget {
         indent: 10,
         endIndent: 10,
       ),
-      Flexible(flex: 3, child: Challenges(ChallengesModel()))
+      Flexible(flex: 4, child: Challenges(ChallengesModel()))
     ]);
   }
 }

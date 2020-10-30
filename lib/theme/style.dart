@@ -8,6 +8,7 @@ ThemeData darkTheme() {
       shadowColor: Colors.white,
       accentColor: Colors.orange,
       hintColor: Colors.white,
+      highlightColor: Colors.cyan,
       buttonColor: Colors.white,
       scaffoldBackgroundColor: createMaterialColor(Color(0xFFF000539)),
       textTheme: TextTheme(
