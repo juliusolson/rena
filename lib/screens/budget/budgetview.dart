@@ -3,6 +3,7 @@ import 'package:rena/screens/budget/components/budget_overview.dart';
 import 'package:rena/utils/colors.dart';
 import 'components/goal_card.dart';
 import 'components/goal_creation.dart';
+import 'components/goal_view.dart';
 import 'package:rena/models/goalmodel.dart';
 
 class Category {
@@ -46,10 +47,10 @@ class _BudgetViewState extends State<BudgetView> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle themeInactive = Theme.of(context).textTheme.bodyText1;
-    TextStyle themeActive = themeInactive.copyWith(
-      decoration: TextDecoration.underline,
-      color: Theme.of(context).accentColor,
+    TextStyle themeActive = Theme.of(context).textTheme.headline2;
+
+    TextStyle themeInactive = themeActive.copyWith(
+      color: Theme.of(context).textTheme.headline2.color.withOpacity(0.6),
     );
     return SafeArea(
       child: Center(
@@ -118,7 +119,14 @@ class _BudgetViewState extends State<BudgetView> {
                             Goal goal = dummyGoals
                                 .where((g) => g.type == _selectedCategory)
                                 .toList()[idx];
-                            return GoalCard(goal);
+                            return GestureDetector(
+                              onTap: () => showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx2) {
+                                    return GoalView(goal);
+                                  }),
+                              child: GoalCard(goal),
+                            );
                           }),
                     ),
                   )

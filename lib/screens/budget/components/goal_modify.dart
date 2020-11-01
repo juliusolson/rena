@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:rena/utils/colors.dart';
+import 'package:rena/models/goalmodel.dart';
 
-class GoalCreation extends StatelessWidget {
+class GoalModify extends StatelessWidget {
+  final Goal goal;
+  GoalModify(this.goal);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -11,10 +15,9 @@ class GoalCreation extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.only(left: 10, right: 10),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Flexible(
-                        flex: 1,
+                    Align(
                         child: Container(
                             alignment: Alignment.centerRight,
                             child: CloseButton(
@@ -25,11 +28,11 @@ class GoalCreation extends StatelessWidget {
                         child: Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Nytt Sparmål",
+                              "Ändra",
                               style: Theme.of(context).textTheme.headline1,
                             ))),
                     Flexible(
-                        flex: 7,
+                        flex: 3,
                         child: Form(
                             child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,6 +44,7 @@ class GoalCreation extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
+                                      initialValue: goal.name,
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                       decoration: InputDecoration(
@@ -62,6 +66,7 @@ class GoalCreation extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
+                                      initialValue: goal.amount.toString(),
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                       decoration: InputDecoration(
@@ -84,6 +89,7 @@ class GoalCreation extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
+                                      initialValue: goal.description,
                                       maxLines: 5,
                                       minLines: 5,
                                       style:

@@ -41,24 +41,22 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
-
   int _currentIndex = 0;
-  final List <Widget> _children = allViews;
+  final List<Widget> _children = allViews;
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       appBar: AppBar(
-        title: Text("Rena", 
+        title: Text(
+          "Rena",
           style: TextStyle(fontFamily: "Renogare"),
         ),
         actions: [
           IconButton(
-          icon: Icon(Icons.lightbulb),
-          onPressed: () => this.widget.switcher(),
+            icon: Icon(Icons.lightbulb),
+            onPressed: () => this.widget.switcher(),
           ),
         ],
-
       ),
       body: SafeArea(
         top: false,
@@ -77,11 +75,11 @@ class _NavState extends State<Nav> {
         currentIndex: _currentIndex,
         onTap: (int idx) => setState(() => _currentIndex = idx),
         items: allDestinations.map((Destination dest) {
-            return BottomNavigationBarItem(
-              icon: Icon(dest.icon),
-              label: dest.title,
-            );
-          }).toList(),
+          return BottomNavigationBarItem(
+            icon: Icon(dest.icon),
+            label: dest.title,
+          );
+        }).toList(),
       ),
     );
   }

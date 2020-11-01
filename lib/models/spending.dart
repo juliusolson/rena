@@ -52,17 +52,17 @@ class DummyData {
     'Spel',
     'Boende',
     'Mat',
-    'Nöje',
+
     'Transport',
     'Övrigt'
   ];
   static List<String> colors = [
     '#ED1E79',
-    '#FBAE17',
     '#F15A24',
+    '#FBAE17',
     '#7EC5FF',
     '#8333FF',
-    '#00f365'
+
   ];
   LinkedHashMap week2spending =
       new LinkedHashMap<int, List<SpendingCategory>>();
