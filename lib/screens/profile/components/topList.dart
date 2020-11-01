@@ -44,13 +44,12 @@ class _HighScoreListState extends State<HighScoreList> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               color: Colors
-                  .indigo[100], //Theme.of(context).colorScheme.background,
+                  .indigo[200], //Theme.of(context).colorScheme.background,
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: ListView.builder(
                   itemCount: widget.users.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return HighScoreEntry(
-                        widget.users[index], index, (index == 0));
+                    return HighScoreEntry(widget.users[index], index);
                   })))
     ]);
   }
@@ -76,14 +75,13 @@ class _HighScoreListState extends State<HighScoreList> {
 
 class HighScoreEntry extends StatelessWidget {
   ProfileEntry user;
-  bool currentUser;
   int index;
-  HighScoreEntry(this.user, this.index, this.currentUser);
+  HighScoreEntry(this.user, this.index);
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: currentUser ? Colors.indigo[100] : Colors.blueGrey[100],
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        color: user.isCurrentUser ? Colors.indigo[100] : Colors.transparent,
+        elevation: 0,
         child: Row(children: [
           Expanded(
               flex: 1,
@@ -104,10 +102,70 @@ class HighScoreEntry extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText1)),
           Expanded(
               flex: 1,
-              child: currentUser
+              child: user.isCurrentUser
                   ? Text('')
-                  : Text('\u{1F4AA}',
-                      style: Theme.of(context).textTheme.bodyText1))
+                  : TextButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext ctx2) {
+                              return SendPeppDialog(user.name);
+                            });
+                      },
+                      child: Text('\u{1F4AA}',
+                          style: Theme.of(context).textTheme.bodyText1)))
         ]));
+  }
+}
+
+class SendPeppDialog extends StatelessWidget {
+  String name;
+  SendPeppDialog(this.name);
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Wrap(children: [
+      Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Container(
+              decoration: new BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  border:
+                      new Border.all(color: Theme.of(context).highlightColor),
+                  borderRadius: BorderRadius.circular(15)),
+              child: Stack(children: [
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                    child: Row(children: [
+                      Flexible(
+                          flex: 3,
+                          child: Column(
+                            children: [
+                              Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Sjysst!',
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  )),
+                              Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                      'Du har skickat en pepp till $name!'))
+                            ],
+                          )),
+                      Flexible(
+                          child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                '\u{1F4AA}',
+                                style: TextStyle(fontSize: 50),
+                              )))
+                    ])),
+                Align(alignment: Alignment.topRight, child: CloseButton()),
+              ])))
+    ]));
   }
 }

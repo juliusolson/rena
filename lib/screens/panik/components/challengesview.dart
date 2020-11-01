@@ -10,7 +10,7 @@ class Challenges extends StatefulWidget {
 
 class _ChallengesState extends State<Challenges> {
   int _selectedIndex;
-  List<String> challenges;
+  List<Challenge> _challenges;
   @override
   void initState() {
     onCategorySelect(0);
@@ -49,25 +49,19 @@ class _ChallengesState extends State<Challenges> {
           child: PageView.builder(
               scrollDirection: Axis.horizontal,
               physics: PageScrollPhysics(),
-              itemCount: challenges.length,
+              itemCount: _challenges.length,
               controller: PageController(
                 viewportFraction: 0.8,
                 initialPage: 0,
               ),
               itemBuilder: (BuildContext ctx, int index) {
-                return Container(
-                    decoration: new BoxDecoration(
-                        border: Border.all(color: Colors.white),
-                        shape: BoxShape.circle),
-                    alignment: Alignment.center,
-                    child: Text(challenges[index],
-                        style: Theme.of(context).textTheme.bodyText1));
+                return ChallengesViewChallangeWidget(_challenges[index]);
               })),
       Flexible(
           flex: 1,
           child: Container(
               decoration: new BoxDecoration(
-                  color: Colors.cyan,
+                  color: Theme.of(context).highlightColor,
                   borderRadius: BorderRadius.all(Radius.circular(30))),
               child: TextButton(
                   onPressed: () {
@@ -81,11 +75,82 @@ class _ChallengesState extends State<Challenges> {
   }
 
   void onCategorySelect(int index) {
-    List<String> challenges =
+    List<Challenge> challenges =
         widget.dataModel.getChallenges(ChallengesModel.categories[index], 3);
     setState(() {
       this._selectedIndex = index;
-      this.challenges = challenges;
+      this._challenges = challenges;
     });
+  }
+}
+
+class ChallengesViewChallangeWidget extends StatelessWidget {
+  Challenge challengeData;
+  ChallengesViewChallangeWidget(this.challengeData);
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext ctx) {
+                return ChallengeDialog(this.challengeData);
+              });
+        },
+        child: Container(
+            decoration: new BoxDecoration(
+                color: (challengeData.completed) ? Colors.green : Colors.red,
+                border: Border.all(color: Theme.of(context).hintColor),
+                shape: BoxShape.circle),
+            alignment: Alignment.center,
+            child: Text(challengeData.title,
+                style: Theme.of(context).textTheme.bodyText1)));
+  }
+}
+
+class ChallengeDialog extends StatelessWidget {
+  Challenge challengeData;
+  ChallengeDialog(this.challengeData);
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Stack(children: [
+            Align(alignment: Alignment.topRight, child: CloseButton()),
+            Container(
+                width: 400,
+                height: 350,
+                decoration: new BoxDecoration(
+                    border: Border.all(color: Theme.of(context).hintColor),
+                    shape: BoxShape.circle),
+                alignment: Alignment.center,
+                child: Text('${this.challengeData.title}',
+                    style: Theme.of(context).textTheme.bodyText1))
+          ]),
+          Align(
+              alignment: Alignment.topLeft,
+              child: Text('Utmaning',
+                  style: Theme.of(context).textTheme.headline1)),
+          Flexible(flex: 5, child: Text('${this.challengeData.description}')),
+          Flexible(
+              flex: 1,
+              child: GestureDetector(
+                  onTap: () {
+                    this.challengeData.completed = true;
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 70, vertical: 10),
+                    decoration: new BoxDecoration(
+                        color: Theme.of(context).highlightColor,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: Text(
+                      'Avklarad',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                  )))
+        ]));
   }
 }

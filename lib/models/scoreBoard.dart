@@ -8,6 +8,7 @@ class ProfileEntry {
   int numberOfPins;
   int displayedScore = 0;
   Color color = Colors.lightBlue;
+  bool isCurrentUser = false;
   ProfileEntry(this.name, this.gamblingFreeDays, this.numberOfPins);
 
   String toString() {
@@ -69,6 +70,7 @@ class ProfileDummyData extends ChangeNotifier {
       users[i] = new ProfileEntry(name, rng.nextInt(100), rng.nextInt(30));
       users[i].color = colors[rng.nextInt(colors.length)];
     }
+    users[rng.nextInt(users.length)].isCurrentUser = true;
     return users;
   }
 }

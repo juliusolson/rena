@@ -1,8 +1,11 @@
 import 'dart:collection';
 
 class Challenge {
-  String description;
-  Challenge(this.description);
+  String title;
+  String description =
+      "Dags att göra 10 burpees! Hoppa upp med händerna över huvudet, ta dig ner till en djup armhävningsposition och hoppa upp igen. Variera övningen med attt göra en situp eller sidoplankan.";
+  bool completed = false;
+  Challenge(this.title);
 }
 
 class ChallengesModel {
@@ -22,7 +25,7 @@ class ChallengesModel {
     ]
   };
 
-  List<String> getChallenges(String category, int numChallanges) {
+  List<Challenge> getChallenges(String category, int numChallanges) {
     List<Challenge> result;
     List<Challenge> selectedChallenges = challengesMap[category];
     if (selectedChallenges.length <= numChallanges) {
@@ -32,11 +35,6 @@ class ChallengesModel {
       result.shuffle();
       result = result.take(numChallanges).toList();
     }
-    return result
-        .map((challenge) {
-          return challenge.description;
-        })
-        .cast<String>()
-        .toList();
+    return result;
   }
 }
