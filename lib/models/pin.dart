@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/widgets.dart';
-
 class Pin {
   String title;
   String description;

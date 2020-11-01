@@ -1,4 +1,3 @@
-import 'dart:collection';
 
 class Challenge {
   String title;
