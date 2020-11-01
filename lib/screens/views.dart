@@ -5,7 +5,7 @@ import 'package:rena/screens/profile/profileview.dart';
 import 'package:rena/screens/budget/budgetview.dart';
 
 List<Widget> allViews = <Widget>[
-  HomeView("Home"),
+  HomeView(),
   BudgetView("Budget"),
   ProfileView("Profile"),
   PanikView("Panik"),
