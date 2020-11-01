@@ -45,9 +45,9 @@ class SpendingsBarChart extends StatelessWidget {
         colorFn: (_, int idx) {
           charts.Color col;
           if (idx % 2 == 0) {
-            col = charts.Color.fromHex(code: "#00D3B3");
+            col = charts.Color.fromHex(code: "#00576A");
           } else {
-            col = charts.Color.fromHex(code: "#7EC5FF");
+            col = charts.Color.fromHex(code: "#00D3B3");
           }
           return col;
         },
