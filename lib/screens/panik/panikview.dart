@@ -10,7 +10,7 @@ class PanikView extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Flexible(flex: 2, child: Promises()),
+      Flexible(flex: 2, child: PromisesView()),
       Divider(
         color: Colors.grey,
         height: 10,
