@@ -39,20 +39,36 @@ class _HighScoreListState extends State<HighScoreList> {
               })),
       Flexible(
           flex: 3,
-          child: Card(
+          child: PageView.builder(
+              scrollDirection: Axis.horizontal,
+              physics: PageScrollPhysics(),
+              itemCount: widget.categories.length,
+              controller: PageController(
+                viewportFraction: 1,
+                initialPage: 0
+              ),
+              onPageChanged: (int page){setState(() {
+                this._selectedIndex = page;
+              });},
+              itemBuilder: (BuildContext ctx, int index) {
+                return _getHighScoreListView(index);
+              }))
+    ]);
+  }
+  Widget _getHighScoreListView(int categoryIndex){
+    _selectSorting(categoryIndex);
+    List<Widget> widgets = new List();
+    for (var i = 0; i < widget.users.length; i++) {
+      widgets.add(HighScoreEntry(widget.users[i], i));
+    }
+    return Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
               color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5), //Theme.of(context).colorScheme.background,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: ListView.builder(
-                  itemCount: widget.users.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return HighScoreEntry(widget.users[index], index);
-                  })))
-    ]);
+              margin: EdgeInsets.symmetric(horizontal: 20), 
+              child: ListView(children: widgets));
   }
-
   void _selectSorting(int index) {
     widget.users.forEach((element) {
       element.setDisplayedCategory(index);
@@ -66,9 +82,9 @@ class _HighScoreListState extends State<HighScoreList> {
         return b.numberOfPins.compareTo(a.numberOfPins);
       });
     }
-    setState(() {
-      this._selectedIndex = index;
-    });
+    //setState(() {
+      //this._selectedIndex = index;
+    //});
   }
 }
 
