@@ -14,7 +14,7 @@ class CategoryBars extends StatelessWidget {
     return Container(
         padding: EdgeInsets.only(top: 40.0, left: 10.0, right: 10.0),
         child: ListView.separated(
-          physics: BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             itemCount: this.categories.length,
             separatorBuilder: (context, index) => SizedBox(height: 20),
             itemBuilder: (BuildContext ctx, int index) {
@@ -41,7 +41,8 @@ class CategoryBars extends StatelessWidget {
                   lineHeight: 10.0,
                   percent: this.categories[index].amount / total,
                   backgroundColor: Colors.grey,
-                  progressColor: createMaterialColor(Color(color)),//createMaterialColor(Color(0xfffed1e79)),
+                  progressColor: createMaterialColor(
+                      Color(color)), //createMaterialColor(Color(0xfffed1e79)),
                 ),
               ]);
             }));

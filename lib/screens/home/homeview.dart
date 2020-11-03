@@ -10,14 +10,14 @@ import 'package:rena/utils/colors.dart';
 import 'dart:math';
 
 class HomeView extends StatefulWidget {
-  HomeView({Key key}) :super (key: key);
+  HomeView({Key key}) : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
- String _selectedWidget = 'pie';
+  String _selectedWidget = 'pie';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -68,7 +68,11 @@ class _HomeViewState extends State<HomeView> {
         Flexible(
             flex: 2,
             child: Container(
-              child: SpendingsBarChart.withSampleData(),
+              child: Consumer<WeeklySpendingModel>(
+                builder: (context, model, child) {
+                  return SpendingsBarChart.withDummyData(model.data);
+                }
+              ),
             )),
         Flexible(
           flex: 4,
@@ -83,7 +87,9 @@ class _HomeViewState extends State<HomeView> {
                 subtitle: Row(
                   children: [
                     FlatButton(
-                        onPressed: () => setState(() {this._selectedWidget = 'pie';}),
+                        onPressed: () => setState(() {
+                              this._selectedWidget = 'pie';
+                            }),
                         child: null,
                         textColor: Theme.of(context).textTheme.bodyText1.color,
                         shape: CircleBorder(
@@ -96,12 +102,15 @@ class _HomeViewState extends State<HomeView> {
                     Transform.rotate(
                         angle: 90 * pi / 180,
                         child: IconButton(
-                            icon: Icon(
-                              Icons.bar_chart_outlined,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                            color: Colors.white,
-                            onPressed: () => setState(() {this._selectedWidget = 'bars';}),))
+                          icon: Icon(
+                            Icons.bar_chart_outlined,
+                            color: Theme.of(context).iconTheme.color,
+                          ),
+                          color: Colors.white,
+                          onPressed: () => setState(() {
+                            this._selectedWidget = 'bars';
+                          }),
+                        ))
                   ],
                 ),
               )),
@@ -111,14 +120,15 @@ class _HomeViewState extends State<HomeView> {
                     builder: (context, model, child) {
                   switch (_selectedWidget) {
                     case 'pie':
-                    return SpendingsPieChart.customSampleData(model.currentCategories);
+                      return SpendingsPieChart.customSampleData(
+                          model.currentCategories);
                       break;
                     case 'bars':
                       return CategoryBars(model.currentCategories);
                       break;
                     default:
-                    return SpendingsPieChart.customSampleData(model.currentCategories);
-
+                      return SpendingsPieChart.customSampleData(
+                          model.currentCategories);
                   }
                 }),
               ),

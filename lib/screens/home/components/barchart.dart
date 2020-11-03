@@ -8,11 +8,44 @@ class SpendingsBarChart extends StatelessWidget {
   final bool animate;
 
   SpendingsBarChart(this.seriesList, {this.animate});
-  
+
   factory SpendingsBarChart.withSampleData() {
     return new SpendingsBarChart(
       _createSampleData(),
       animate: true,
+    );
+  }
+
+  factory SpendingsBarChart.withDummyData(DummyData data) {
+    List<WeeklySpending> ws = [];
+
+    data.week2spending.forEach((key, value) {
+      ws.add(WeeklySpending(key.toString(), value[0].amount));
+    });
+
+    ws.sort((ws1, ws2) => int.parse(ws1.week).compareTo(int.parse(ws2.week)));
+
+    List<charts.Series<WeeklySpending, String>> series = [
+      charts.Series<WeeklySpending, String>(
+        id: 'spendings',
+        colorFn: (_, int idx) {
+          charts.Color col;
+          if (idx % 2 == 0) {
+            col = charts.Color.fromHex(code: "#00576A");
+          } else {
+            col = charts.Color.fromHex(code: "#00D3B3");
+          }
+          return col;
+        },
+        domainFn: (WeeklySpending ws, _) => ws.week,
+        measureFn: (WeeklySpending ws, _) => ws.spendings,
+        data: ws,
+      )
+    ];
+
+    return new SpendingsBarChart(
+      series,
+      animate: false,
     );
   }
 
@@ -22,12 +55,10 @@ class SpendingsBarChart extends StatelessWidget {
       seriesList,
       animate: animate,
       domainAxis: new charts.OrdinalAxisSpec(
-        renderSpec: new charts.SmallTickRendererSpec(
-          labelStyle: new charts.TextStyleSpec(
-            color: charts.MaterialPalette.white,
-          )
-        )
-      ),
+          renderSpec: new charts.SmallTickRendererSpec(
+              labelStyle: new charts.TextStyleSpec(
+        color: charts.MaterialPalette.white,
+      ))),
       primaryMeasureAxis: new charts.NumericAxisSpec(
         renderSpec: new charts.NoneRenderSpec(),
       ),
@@ -36,7 +67,8 @@ class SpendingsBarChart extends StatelessWidget {
 
   static List<charts.Series<WeeklySpending, String>> _createSampleData() {
     final data = List<WeeklySpending>.generate(15, (index) {
-      return new WeeklySpending((index+30).toString(), math.Random().nextInt(100));
+      return new WeeklySpending(
+          (index + 30).toString(), math.Random().nextInt(100));
     });
 
     return [
@@ -57,5 +89,4 @@ class SpendingsBarChart extends StatelessWidget {
       )
     ];
   }
-
 }
