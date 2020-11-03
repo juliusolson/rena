@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rena/theme/icons.dart';
 
 class Destination {
   const Destination(this.title, this.icon, this.color);
@@ -9,8 +10,8 @@ class Destination {
 }
 
 const List<Destination> allDestinations = <Destination>[
-  Destination("Översikt", Icons.blur_circular_rounded, Colors.teal),
-  Destination("Sparmål", Icons.money, Colors.red),
-  Destination("Socialt", Icons.person, Colors.red),
-  Destination("Stöd", Icons.support, Colors.green),
+  Destination("Översikt", CustomIcons.omni, Colors.teal),
+  Destination("Sparmål", CustomIcons.savings, Colors.red),
+  Destination("Socialt", CustomIcons.pins, Colors.red),
+  Destination("Stöd", CustomIcons.lifebuoy_1, Colors.green),
 ];
