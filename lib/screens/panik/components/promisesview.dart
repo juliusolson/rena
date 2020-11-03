@@ -12,18 +12,40 @@ class _PromisesViewState extends State<PromisesView> {
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Flexible(
-          child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
+      Row(children: [Text(
                 'Mina löften',
                 textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.headline1,
-              ))),
-      Flexible(flex: 4, child: getPromisesWidget(context))
+                style: Theme.of(context).textTheme.headline1),
+              GestureDetector(
+                onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext ctx) {
+                          return PromiseCreationDialog(widget.promises);
+                });},
+                child: Container(decoration: new BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).highlightColor),
+               child:Icon(Icons.add))),
+               GestureDetector(
+                onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext ctx) {
+                          return EditPromisesDialog(widget.promises);
+                        });},
+                child: Container(decoration: new BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).highlightColor),
+               child:Icon(Icons.edit)))]),
+      Flexible(flex: 4, child: ListView.builder(
+        itemCount:widget.promises.promises.length,
+        itemBuilder: (BuildContext ctx, int index){
+        return Card(
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15))
+          ,
+        child: Text(widget.promises.promises[index].body, style: Theme.of(context).textTheme.caption));
+        }))
     ]);
   }
-
+  /*
   Widget getPromisesWidget(BuildContext context) {
     Widget editButtons = Column(children: [
       Expanded(
@@ -33,13 +55,8 @@ class _PromisesViewState extends State<PromisesView> {
                   color: Theme.of(context).highlightColor),
               margin: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
               child: TextButton(
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext ctx) {
-                          return PromiseCreationDialog(widget.promises);
-                        });
-                  },
+                  onPressed: () {}
+                  ,
                   child: Text('Ny påminnelse',
                       style: Theme.of(context).textTheme.caption)))),
       Expanded(
@@ -61,6 +78,7 @@ class _PromisesViewState extends State<PromisesView> {
     ]);
     return editButtons;
   }
+  */
 }
 
 class PromiseCreationDialog extends StatefulWidget {

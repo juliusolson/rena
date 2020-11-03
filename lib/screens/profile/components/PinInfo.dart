@@ -11,8 +11,7 @@ class PinInfo extends StatelessWidget {
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           Stack(children: [
-            Flexible(
-                flex: 4, child: Image(image: AssetImage(pinData.imageURL))),
+            Image(image: AssetImage(pinData.imageURL)),
             Align(alignment: Alignment.topRight, child: CloseButton())
           ]),
           Flexible(
@@ -21,7 +20,7 @@ class PinInfo extends StatelessWidget {
                   textAlign: TextAlign.left,
                   style: Theme.of(context).textTheme.bodyText1)),
           Container(
-              padding: const EdgeInsets.all(15),
+              padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.white,

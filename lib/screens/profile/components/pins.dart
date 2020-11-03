@@ -2,24 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:rena/models/pin.dart';
 import 'package:rena/screens/profile/components/PinInfo.dart';
 
-class Pins extends StatefulWidget {
+class PinsView extends StatefulWidget {
   final List<String> categories;
-  final List<Pin> pins = [
-    Pin.dummy(),
-    Pin.dummy(),
-    Pin.dummy(),
-    Pin.dummy(),
-    Pin.dummy(),
-    Pin.dummy(),
-    Pin.dummy(),
-    Pin.dummy()
-  ];
-  Pins(this.categories);
+  final Pins pins = new Pins();
+  PinsView(this.categories);
   @override
-  _PinsState createState() => _PinsState();
+  _PinsViewState createState() => _PinsViewState();
 }
 
-class _PinsState extends State<Pins> {
+class _PinsViewState extends State<PinsView> {
   int _selectedIndex;
   @override
   void initState() {
@@ -46,16 +37,16 @@ class _PinsState extends State<Pins> {
       Flexible(
           flex: 5,
           child: GridView.builder(
-              itemCount: widget.pins.length,
+              itemCount: widget.pins.pins.length,
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
               itemBuilder: (BuildContext ctx, int index) {
-                return this.getPinWdiget(widget.pins[index]);
+                return this.getPinWidget(widget.pins.pins[index]);
               }))
     ]);
   }
 
-  Widget getPinWdiget(Pin pinData) {
+  Widget getPinWidget(Pin pinData) {
     Widget pinIcon, result;
     if (pinData.isAcquied()) {
       pinIcon = Image.asset(pinData.imageURL);

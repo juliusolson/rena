@@ -13,7 +13,7 @@ class _ChallengesState extends State<Challenges> {
   List<Challenge> _challenges;
   @override
   void initState() {
-    onCategorySelect(0);
+    onCategorySelect();
     super.initState();
   }
 
@@ -28,7 +28,7 @@ class _ChallengesState extends State<Challenges> {
               alignment: Alignment.bottomLeft,
               child: Text('Utmaningar',
                   style: Theme.of(context).textTheme.headline1))),
-      Flexible(
+      /*Flexible(
           flex: 2,
           child: Align(
               alignment: Alignment.topLeft,
@@ -43,7 +43,7 @@ class _ChallengesState extends State<Challenges> {
                             style: (index != _selectedIndex)
                                 ? Theme.of(context).textTheme.headline2
                                 : Theme.of(context).textTheme.headline3));
-                  }))),
+                  }))),*/
       Flexible(
           flex: 7,
           child: PageView.builder(
@@ -51,11 +51,11 @@ class _ChallengesState extends State<Challenges> {
               physics: PageScrollPhysics(),
               itemCount: _challenges.length,
               controller: PageController(
-                viewportFraction: 1,
+                viewportFraction: 0.8,
                 initialPage: 0,
               ),
               itemBuilder: (BuildContext ctx, int index) {
-                return ChallengesViewChallangeWidget(_challenges[index]);
+                return ChallengesViewChallengeWidget(_challenges[index]);
               })),
       Flexible(
           flex: 1,
@@ -65,7 +65,7 @@ class _ChallengesState extends State<Challenges> {
                   borderRadius: BorderRadius.all(Radius.circular(30))),
               child: TextButton(
                   onPressed: () {
-                    onCategorySelect(_selectedIndex);
+                    onCategorySelect();
                   },
                   child: Text(
                     'Generera nya',
@@ -74,19 +74,19 @@ class _ChallengesState extends State<Challenges> {
     ]));
   }
 
-  void onCategorySelect(int index) {
+  void onCategorySelect() {
     List<Challenge> challenges =
-        widget.dataModel.getChallenges(ChallengesModel.categories[index], 3);
+        widget.dataModel.getRandomChallenges();
     setState(() {
-      this._selectedIndex = index;
+      //this._selectedIndex = index;
       this._challenges = challenges;
     });
   }
 }
 
-class ChallengesViewChallangeWidget extends StatelessWidget {
+class ChallengesViewChallengeWidget extends StatelessWidget {
   Challenge challengeData;
-  ChallengesViewChallangeWidget(this.challengeData);
+  ChallengesViewChallengeWidget(this.challengeData);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -103,8 +103,10 @@ class ChallengesViewChallangeWidget extends StatelessWidget {
                 border: Border.all(color: Theme.of(context).hintColor),
                 shape: BoxShape.circle),
             alignment: Alignment.center,
-            child: Text(challengeData.title,
-                style: Theme.of(context).textTheme.bodyText1)));
+            child: Align(alignment: Alignment.center,
+             child:Column(children: [Text(challengeData.category, style: Theme.of(context).textTheme.headline2),
+              Text(challengeData.title,
+                style: Theme.of(context).textTheme.bodyText1)]))));
   }
 }
 
