@@ -51,7 +51,7 @@ class _ChallengesState extends State<Challenges> {
               physics: PageScrollPhysics(),
               itemCount: _challenges.length,
               controller: PageController(
-                viewportFraction: 0.8,
+                viewportFraction: 1,
                 initialPage: 0,
               ),
               itemBuilder: (BuildContext ctx, int index) {
@@ -99,7 +99,7 @@ class ChallengesViewChallangeWidget extends StatelessWidget {
         },
         child: Container(
             decoration: new BoxDecoration(
-                color: (challengeData.completed) ? Colors.green : Colors.red,
+                //color: (challengeData.completed) ? Colors.green : Colors.red,
                 border: Border.all(color: Theme.of(context).hintColor),
                 shape: BoxShape.circle),
             alignment: Alignment.center,

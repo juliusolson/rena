@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:rena/models/promisemodel.dart';
+import 'package:rena/screens/panik/components/editpromisesview.dart';
 
-class Promises extends StatelessWidget {
+class PromisesView extends StatefulWidget {
+  final Promises promises = new Promises();
+  @override
+  _PromisesViewState createState() => _PromisesViewState();
+}
+
+class _PromisesViewState extends State<PromisesView> {
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -29,7 +37,7 @@ class Promises extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (BuildContext ctx) {
-                          return PromiseCreationDialog();
+                          return PromiseCreationDialog(widget.promises);
                         });
                   },
                   child: Text('Ny påminnelse',
@@ -41,7 +49,13 @@ class Promises extends StatelessWidget {
                   color: Theme.of(context).highlightColor),
               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext ctx) {
+                          return EditPromisesDialog(widget.promises);
+                        });
+                  },
                   child: Text('Redigera',
                       style: Theme.of(context).textTheme.caption))))
     ]);
@@ -50,12 +64,22 @@ class Promises extends StatelessWidget {
 }
 
 class PromiseCreationDialog extends StatefulWidget {
+  final Promises promises;
+  PromiseCreationDialog(this.promises);
   @override
   _PromiseCreationDialogState createState() => _PromiseCreationDialogState();
 }
 
 class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
   String textBody;
+  int charCount, maxCount = 300;
+  @override
+  void initState() {
+    textBody = '';
+    charCount = textBody.length;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -64,7 +88,13 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
           children: [
             Column(
               children: [
-                Flexible(child: Text('Nytt löfte')),
+                Align(
+                    alignment: Alignment.topLeft,
+                    widthFactor: 2,
+                    child: Text(
+                      'Nytt löfte',
+                      style: Theme.of(context).textTheme.headline2,
+                    )),
                 Flexible(
                   child: Stack(children: [
                     Container(
@@ -87,8 +117,11 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
                   ]),
                 ),
                 Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Beskrivning')),
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Beskrivning',
+                      style: Theme.of(context).textTheme.caption,
+                    )),
                 Flexible(
                     child: Container(
                         decoration: new BoxDecoration(
@@ -96,19 +129,43 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
                             border:
                                 Border.all(color: Theme.of(context).hintColor)),
                         child: TextField(
-                          maxLines: 5,
+                          decoration: InputDecoration(
+                              labelText: this.textBody,
+                              fillColor: Colors.green),
+                          onChanged: (String text) {
+                            setState(() {
+                              this.charCount = text.length;
+                              this.textBody = text;
+                            });
+                          },
+                          maxLines: 8,
                           minLines: 5,
                           style: Theme.of(context).textTheme.caption,
                         ))),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: Text('$charCount / $maxCount tecken',
+                        style: Theme.of(context).textTheme.caption)),
                 Container(
                     decoration: new BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Theme.of(context).highlightColor),
-                    child: TextButton(onPressed: () {}, child: Text('Spara')))
+                    child: TextButton(
+                        onPressed: () {
+                          savePromise();
+                        },
+                        child: Text('Spara')))
               ],
             ),
             Align(alignment: Alignment.topRight, child: CloseButton())
           ],
         ));
+  }
+
+  void savePromise() {
+    debugPrint('Saving Promise');
+    Promise newPromise = new Promise(this.textBody);
+    widget.promises.promises.add(newPromise);
+    debugPrint(widget.promises.promises.toString());
   }
 }
