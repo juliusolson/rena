@@ -43,8 +43,7 @@ class _HighScoreListState extends State<HighScoreList> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: Colors
-                  .indigo[200], //Theme.of(context).colorScheme.background,
+              color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5), //Theme.of(context).colorScheme.background,
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: ListView.builder(
                   itemCount: widget.users.length,
@@ -92,10 +91,13 @@ class HighScoreEntry extends StatelessWidget {
               child: CircleAvatar(
                   backgroundColor: user.color,
                   child: Text(user.getStringAvatar()))),
+          Spacer(
+
+          ),
           Expanded(
               flex: 4,
               child: Text('${user.name}',
-                  style: Theme.of(context).textTheme.bodyText1)),
+                  style: Theme.of(context).textTheme.bodyText2)),
           Expanded(
               flex: 1,
               child: Text('${user.getDisplayedCategory()}',
