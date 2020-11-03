@@ -1,5 +1,33 @@
 import 'dart:math';
 
+class Pins{
+  List<Pin> pins = [Pin('Spelfri i 7 dagar', 
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
+        '2020-10-02',
+        'images/streak_7d1-512.png'),
+        Pin(
+        'Spelfri i 15 dagar', 
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
+        '2020-10-02',
+        'images/streak_15dstar-512.png'),
+        Pin('Spelfri i 30 dagar', 
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
+        '2020-10-02',
+        'images/streak_30d-512.png'),
+        Pin('Spelfri i 60 dagar', 
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
+        '2020-10-02',
+        'images/streak_60d-512.png'),
+        Pin('Spelfri i 100 dagar', 
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
+        '2020-10-02',
+        'images/streak_100d-512.png')];
+    Pins(){
+      for (var i = 0; i < 10; i++) {
+        pins.add(Pin.dummy());
+      }
+    }
+}
 class Pin {
   String title;
   String description;
