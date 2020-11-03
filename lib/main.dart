@@ -20,6 +20,7 @@ class _RenaAppState extends State<RenaApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Rena",
       home: Nav(switcher: () {
         setState(() {
