@@ -22,28 +22,10 @@ class _ChallengesState extends State<Challenges> {
     return Container(
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Flexible(
-          flex: 2,
-          child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Text('Utmaningar',
-                  style: Theme.of(context).textTheme.headline1))),
-      /*Flexible(
-          flex: 2,
-          child: Align(
-              alignment: Alignment.topLeft,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: ChallengesModel.categories.length,
-                  itemBuilder: (BuildContext ctx, int index) {
-                    return TextButton(
-                        onPressed: () => {onCategorySelect(index)},
-                        child: Text(ChallengesModel.categories[index],
-                            style: (index != _selectedIndex)
-                                ? Theme.of(context).textTheme.headline2
-                                : Theme.of(context).textTheme.headline3));
-                  }))),*/
+      Align(
+          alignment: Alignment.topLeft,
+          child:
+              Text('Utmaningar', style: Theme.of(context).textTheme.headline1)),
       Flexible(
           flex: 7,
           child: PageView.builder(
@@ -51,11 +33,16 @@ class _ChallengesState extends State<Challenges> {
               physics: PageScrollPhysics(),
               itemCount: _challenges.length,
               controller: PageController(
-                viewportFraction: 0.8,
+                viewportFraction: 0.7,
                 initialPage: 0,
               ),
               itemBuilder: (BuildContext ctx, int index) {
-                return ChallengesViewChallengeWidget(_challenges[index]);
+                return Column(children: [
+                  Text(_challenges[index].category,
+                      style: Theme.of(context).textTheme.headline2),
+                  Expanded(
+                      child: ChallengesViewChallengeWidget(_challenges[index]))
+                ]);
               })),
       Flexible(
           flex: 1,
@@ -64,9 +51,7 @@ class _ChallengesState extends State<Challenges> {
                   color: Theme.of(context).highlightColor,
                   borderRadius: BorderRadius.all(Radius.circular(30))),
               child: TextButton(
-                  onPressed: () {
-                    onCategorySelect();
-                  },
+                  onPressed: onCategorySelect,
                   child: Text(
                     'Generera nya',
                     style: Theme.of(context).textTheme.caption,
@@ -75,8 +60,7 @@ class _ChallengesState extends State<Challenges> {
   }
 
   void onCategorySelect() {
-    List<Challenge> challenges =
-        widget.dataModel.getRandomChallenges();
+    List<Challenge> challenges = widget.dataModel.getRandomChallenges();
     setState(() {
       //this._selectedIndex = index;
       this._challenges = challenges;
@@ -98,15 +82,16 @@ class ChallengesViewChallengeWidget extends StatelessWidget {
               });
         },
         child: Container(
+            margin: EdgeInsets.symmetric(vertical: 7),
             decoration: new BoxDecoration(
                 //color: (challengeData.completed) ? Colors.green : Colors.red,
                 border: Border.all(color: Theme.of(context).hintColor),
                 shape: BoxShape.circle),
             alignment: Alignment.center,
-            child: Align(alignment: Alignment.center,
-             child:Column(children: [Text(challengeData.category, style: Theme.of(context).textTheme.headline2),
-              Text(challengeData.title,
-                style: Theme.of(context).textTheme.bodyText1)]))));
+            child: Align(
+                alignment: Alignment.center,
+                child: Text(challengeData.title,
+                    style: Theme.of(context).textTheme.bodyText1))));
   }
 }
 

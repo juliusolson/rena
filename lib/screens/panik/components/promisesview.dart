@@ -1,92 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rena/models/promisemodel.dart';
 import 'package:rena/screens/panik/components/editpromisesview.dart';
 
 class PromisesView extends StatefulWidget {
-  final Promises promises = new Promises();
   @override
   _PromisesViewState createState() => _PromisesViewState();
 }
 
 class _PromisesViewState extends State<PromisesView> {
+  Promises promises = new Promises();
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Row(children: [Text(
-                'Mina löften',
+    return ChangeNotifierProvider<Promises>.value(
+        value: promises,
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Row(children: [
+            Text('Mina löften',
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headline1),
-              Align(alignment: Alignment.bottomRight, child: GestureDetector(
+            Align(
+                alignment: Alignment.bottomRight,
+                child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            Widget dialog = PromiseCreationDialog();
+                            return ChangeNotifierProvider<Promises>.value(
+                                value: promises, child: dialog);
+                          });
+                    },
+                    child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Theme.of(context).highlightColor),
+                        child: Icon(Icons.add, size: 50)))),
+            GestureDetector(
                 onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext ctx) {
-                          return PromiseCreationDialog(widget.promises);
-                });},
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext ctx) {
+                        Widget dialog = EditPromisesDialog();
+                        return ChangeNotifierProvider<Promises>.value(
+                            value: promises, child: dialog);
+                      });
+                },
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  decoration: new BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).highlightColor),
-               child:Icon(Icons.add, size: 50)))),
-               GestureDetector(
-                onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext ctx) {
-                          return EditPromisesDialog(widget.promises);
-                        });},
-                child: Container(decoration: new BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).highlightColor),
-               child:Icon(Icons.edit, size: 50)))]),
-      Flexible(flex: 4, child: ListView.builder(
-        itemCount:widget.promises.promises.length,
-        itemBuilder: (BuildContext ctx, int index){
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          decoration: BoxDecoration(border: Border.all(color: Theme.of(context).hintColor),
-            borderRadius: BorderRadius.circular(15)),
-        child: Text(widget.promises.promises[index].body, style: Theme.of(context).textTheme.caption));
-        }))
-    ]);
+                    decoration: new BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).highlightColor),
+                    child: Icon(Icons.edit, size: 50)))
+          ]),
+          Flexible(
+              flex: 4,
+              child: Consumer<Promises>(builder: (context, promises, child) {
+                return ListView.builder(
+                    itemCount: promises.promises.length,
+                    itemBuilder: (BuildContext ctx, int index) {
+                      return Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Theme.of(context).hintColor),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Text(promises.promises[index].body,
+                              style: Theme.of(context).textTheme.caption));
+                    });
+              }))
+        ]));
   }
-  /*
-  Widget getPromisesWidget(BuildContext context) {
-    Widget editButtons = Column(children: [
-      Expanded(
-          child: Container(
-              decoration: new BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Theme.of(context).highlightColor),
-              margin: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
-              child: TextButton(
-                  onPressed: () {}
-                  ,
-                  child: Text('Ny påminnelse',
-                      style: Theme.of(context).textTheme.caption)))),
-      Expanded(
-          child: Container(
-              decoration: new BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Theme.of(context).highlightColor),
-              margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: TextButton(
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext ctx) {
-                          return EditPromisesDialog(widget.promises);
-                        });
-                  },
-                  child: Text('Redigera',
-                      style: Theme.of(context).textTheme.caption))))
-    ]);
-    return editButtons;
-  }
-  */
 }
 
 class PromiseCreationDialog extends StatefulWidget {
-  final Promises promises;
-  PromiseCreationDialog(this.promises);
   @override
   _PromiseCreationDialogState createState() => _PromiseCreationDialogState();
 }
@@ -150,9 +140,7 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
                             border:
                                 Border.all(color: Theme.of(context).hintColor)),
                         child: TextField(
-                          decoration: InputDecoration(
-                              labelText: this.textBody,
-                              fillColor: Colors.green),
+                          decoration: InputDecoration(labelText: this.textBody),
                           onChanged: (String text) {
                             setState(() {
                               this.charCount = text.length;
@@ -173,7 +161,7 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
                         color: Theme.of(context).highlightColor),
                     child: TextButton(
                         onPressed: () {
-                          savePromise();
+                          savePromise(context);
                         },
                         child: Text('Spara')))
               ],
@@ -183,10 +171,7 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
         ));
   }
 
-  void savePromise() {
-    debugPrint('Saving Promise');
-    Promise newPromise = new Promise(this.textBody);
-    widget.promises.promises.add(newPromise);
-    debugPrint(widget.promises.promises.toString());
+  void savePromise(BuildContext context) {
+    Provider.of<Promises>(context, listen: false).addPromise(this.textBody);
   }
 }
