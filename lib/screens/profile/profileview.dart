@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rena/models/scoreBoard.dart';
 import 'package:rena/screens/profile/components/pins.dart';
+import 'package:rena/screens/profile/components/profileFeedView.dart';
 import 'package:rena/screens/profile/components/topList.dart';
 
 class ProfileView extends StatelessWidget {
@@ -31,7 +32,13 @@ class ProfileView extends StatelessWidget {
               ),
           Flexible(
               flex: 1,
-              child: PinsView(['Streaks', 'Sparmål', 'Interaktion', 'Övrigt']))
+              child: PinsView(['Streaks', 'Sparmål', 'Interaktion', 'Övrigt'])),
+          TextButton(onPressed: (){showDialog(
+            context: context,
+             builder:(BuildContext ctx2){
+               return ProfileFeedView();
+               });},
+                child: Text('PROFILE TEST'))
         ]),
       ),
     );

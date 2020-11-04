@@ -11,6 +11,10 @@ class HighScoreList extends StatefulWidget {
 
 class _HighScoreListState extends State<HighScoreList> {
   int _selectedIndex;
+  PageController _pageController = PageController(
+                viewportFraction: 1,
+                initialPage: 0
+              );
 
   @override
   void initState() {
@@ -33,7 +37,7 @@ class _HighScoreListState extends State<HighScoreList> {
                           ? Theme.of(context).textTheme.headline2
                           : Theme.of(context).textTheme.headline3),
                   onPressed: () {
-                    _selectSorting(index);
+                    _pageController.jumpToPage(index);
                   },
                 );
               })),
@@ -43,10 +47,7 @@ class _HighScoreListState extends State<HighScoreList> {
               scrollDirection: Axis.horizontal,
               physics: PageScrollPhysics(),
               itemCount: widget.categories.length,
-              controller: PageController(
-                viewportFraction: 1,
-                initialPage: 0
-              ),
+              controller: _pageController,
               onPageChanged: (int page){setState(() {
                 this._selectedIndex = page;
               });},
@@ -117,7 +118,7 @@ class HighScoreEntry extends StatelessWidget {
           Expanded(
               flex: 1,
               child: Text('${user.getDisplayedCategory()}',
-                  style: Theme.of(context).textTheme.bodyText1)),
+                  style: Theme.of(context).textTheme.caption)),
           Expanded(
               flex: 1,
               child: user.isCurrentUser

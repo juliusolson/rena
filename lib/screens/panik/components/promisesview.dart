@@ -16,15 +16,17 @@ class _PromisesViewState extends State<PromisesView> {
                 'Mina löften',
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headline1),
-              GestureDetector(
+              Align(alignment: Alignment.bottomRight, child: GestureDetector(
                 onTap: () {
                     showDialog(
                         context: context,
                         builder: (BuildContext ctx) {
                           return PromiseCreationDialog(widget.promises);
                 });},
-                child: Container(decoration: new BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).highlightColor),
-               child:Icon(Icons.add))),
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  decoration: new BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).highlightColor),
+               child:Icon(Icons.add, size: 50)))),
                GestureDetector(
                 onTap: () {
                     showDialog(
@@ -33,14 +35,15 @@ class _PromisesViewState extends State<PromisesView> {
                           return EditPromisesDialog(widget.promises);
                         });},
                 child: Container(decoration: new BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).highlightColor),
-               child:Icon(Icons.edit)))]),
+               child:Icon(Icons.edit, size: 50)))]),
       Flexible(flex: 4, child: ListView.builder(
         itemCount:widget.promises.promises.length,
         itemBuilder: (BuildContext ctx, int index){
-        return Card(
-          shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15))
-          ,
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: BoxDecoration(border: Border.all(color: Theme.of(context).hintColor),
+            borderRadius: BorderRadius.circular(15)),
         child: Text(widget.promises.promises[index].body, style: Theme.of(context).textTheme.caption));
         }))
     ]);
