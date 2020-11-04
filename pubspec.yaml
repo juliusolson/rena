@@ -74,6 +74,9 @@ flutter:
     - family: Renogare
       fonts:
         - asset: fonts/Renogare-Regular.ttf
+    - family:  MyFlutterApp
+      fonts:
+        - asset: fonts/CustomIcons.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

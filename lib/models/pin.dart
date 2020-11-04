@@ -47,4 +47,22 @@ class Pin {
   bool isAcquied() {
     return dateAcquired != null;
   }
+
+  factory Pin.fromJson(Map<String, dynamic> json) {
+    return Pin(
+      json["title"] as String,
+      json["description"] as String,
+      json["date"] as String,
+      json["url"] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      "title": this.title,
+      "description": this.description,
+      "date": this.dateAcquired,
+      "url": this.imageURL,
+    };
+  }
 }

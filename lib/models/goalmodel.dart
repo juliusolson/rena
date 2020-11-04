@@ -10,6 +10,37 @@ class Goal {
   int saved;
   GoalType type;
   Goal(this.name, this.description, this.amount, this.saved, this.type);
+
+  factory Goal.fromJson(Map<String, dynamic> json) {
+    GoalType type;
+    switch (json["type"] as String) {
+      case "dream":
+        type = GoalType.Dream;
+        break;
+      case "treat":
+        type = GoalType.Treat;
+        break;
+      default:
+        type = GoalType.Dream;
+    }
+    return Goal(
+      json["name"] as String,
+      json["description"] as String,
+      json["amount"] as int,
+      json["saved"] as int,
+      type,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      "name": this.name,
+      "description": this.description,
+      "amount": this.amount,
+      "saved": this.saved,
+      "type": this.type == GoalType.Dream ? "dream" : "treat",
+    };
+  }
 }
 
 List<Goal> dummyGoals = [

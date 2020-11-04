@@ -31,6 +31,22 @@ class ProfileEntry {
   String getStringAvatar() {
     return name[0];
   }
+
+  factory ProfileEntry.fromJson(Map<String, dynamic> json) {
+    return ProfileEntry(
+      json["name"] as String,
+      json["days"] as int,
+      json["pins"] as int,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      "name": this.name,
+      "days": this.gamblingFreeDays,
+      "pins": this.numberOfPins,
+    };
+  }
 }
 
 class ProfileDummyData extends ChangeNotifier {
