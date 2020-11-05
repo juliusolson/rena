@@ -3,9 +3,58 @@ import 'package:flutter/rendering.dart';
 import 'package:rena/utils/colors.dart';
 import 'package:rena/models/goalmodel.dart';
 
-class GoalModify extends StatelessWidget {
-  final Goal goal;
-  GoalModify(this.goal);
+class GoalModify extends StatefulWidget {
+  final Goals goals;
+  final int index;
+  GoalModify(this.index, this.goals);
+
+  _GoalModifyState createState() => _GoalModifyState();
+}
+
+class _GoalModifyState extends State<GoalModify> {
+  TextEditingController nameController;
+  TextEditingController amountController;
+  TextEditingController descriptionController;
+  Goal goal;
+
+  @override
+  void initState() {
+    setState(() {
+      goal = this.widget.goals.goals[this.widget.index];
+      nameController = TextEditingController(text: goal.name);
+      amountController = TextEditingController(text: goal.amount.toString());
+      descriptionController = TextEditingController(text: goal.description);
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    amountController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  void _updateGoal() {
+    String name = nameController.text;
+    int amount = int.parse(amountController.text);
+    String description = descriptionController.text;
+
+    Goal g = Goal(
+        name,
+        description,
+        amount,
+        this.widget.goals.goals[widget.index].saved,
+        amount > 5000 ? GoalType.Dream : GoalType.Treat);
+
+    this.widget.goals.updateGoal(g, widget.index);
+    // And the award for ugliest hack of the year goes to:
+    for (int i =0; i<2; i++) {
+      Navigator.of(this.context).pop();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +93,7 @@ class GoalModify extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
-                                      initialValue: goal.name,
+                                      controller: nameController,
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                       decoration: InputDecoration(
@@ -66,7 +115,7 @@ class GoalModify extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
-                                      initialValue: goal.amount.toString(),
+                                      controller: amountController,
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                       decoration: InputDecoration(
@@ -89,7 +138,7 @@ class GoalModify extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
-                                      initialValue: goal.description,
+                                      controller: descriptionController,
                                       maxLines: 5,
                                       minLines: 5,
                                       style:
@@ -115,7 +164,9 @@ class GoalModify extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius:
                                       new BorderRadius.circular(30.0)),
-                              onPressed: () {},
+                              onPressed: () {
+                                _updateGoal();
+                              },
                               child: Text(
                                 "Spara",
                                 style: Theme.of(context).textTheme.caption,
