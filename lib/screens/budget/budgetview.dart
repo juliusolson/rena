@@ -10,14 +10,15 @@ import 'package:provider/provider.dart';
 class Category {
   final String label;
   final GoalType type;
-  Category(this.label, this.type);
+  final String description;
+  Category(this.label, this.type, this.description);
 }
 
 class BudgetView extends StatefulWidget {
   final String str;
   final List<Category> categories = [
-    Category("Dreams", GoalType.Dream),
-    Category("Treats", GoalType.Treat),
+    Category("Treats", GoalType.Treat, "Sparmål under 5000 kr"),
+    Category("Dreams", GoalType.Dream, "Sparmål från 5000 kr"),
   ];
 
   BudgetView(this.str);
@@ -73,21 +74,40 @@ class _BudgetViewState extends State<BudgetView> {
                             children: [
                               Flexible(
                                   flex: 2,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: this.widget.categories.length,
-                                    itemBuilder: (BuildContext ctx, int index) {
-                                      return TextButton(
-                                        child: Text(
-                                          this.widget.categories[index].label,
-                                          style: (this._selectedIndex == index)
-                                              ? themeActive
-                                              : themeInactive,
-                                        ),
-                                        onPressed: () => _select(index),
-                                      );
-                                    },
-                                  )),
+                                  child: Stack(children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: this.widget.categories.length,
+                                      itemBuilder:
+                                          (BuildContext ctx, int index) {
+                                        return TextButton(
+                                          child: Text(
+                                            this.widget.categories[index].label,
+                                            style:
+                                                (this._selectedIndex == index)
+                                                    ? themeActive
+                                                    : themeInactive,
+                                          ),
+                                          onPressed: () => _select(index),
+                                        );
+                                      },
+                                    )),
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Container(
+                                            padding: EdgeInsets.only(left: 10),
+                                            child: Text(
+                                              this
+                                                  .widget
+                                                  .categories[_selectedIndex]
+                                                  .description,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .caption,
+                                            ))),
+                                  ])),
                               Flexible(
                                 flex: 1,
                                 child: Container(
@@ -137,7 +157,8 @@ class _BudgetViewState extends State<BudgetView> {
                                       onTap: () => showDialog(
                                           context: context,
                                           builder: (_) {
-                                            return GoalView(goals.goals.indexOf(g),
+                                            return GoalView(
+                                                goals.goals.indexOf(g),
                                                 Provider.of<Goals>(context));
                                           }),
                                       child: GoalCard(g),
