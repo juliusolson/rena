@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rena/models/scoreBoard.dart';
+import 'package:rena/screens/profile/components/profileView.dart';
 
 class HighScoreList extends StatefulWidget {
   List<String> categories = ['Spelfria dagar', 'Pins'];
@@ -11,10 +12,8 @@ class HighScoreList extends StatefulWidget {
 
 class _HighScoreListState extends State<HighScoreList> {
   int _selectedIndex;
-  PageController _pageController = PageController(
-                viewportFraction: 1,
-                initialPage: 0
-              );
+  PageController _pageController =
+      PageController(viewportFraction: 1, initialPage: 0);
 
   @override
   void initState() {
@@ -48,28 +47,43 @@ class _HighScoreListState extends State<HighScoreList> {
               physics: PageScrollPhysics(),
               itemCount: widget.categories.length,
               controller: _pageController,
-              onPageChanged: (int page){setState(() {
-                this._selectedIndex = page;
-              });},
+              onPageChanged: (int page) {
+                setState(() {
+                  this._selectedIndex = page;
+                });
+              },
               itemBuilder: (BuildContext ctx, int index) {
                 return _getHighScoreListView(index);
               }))
     ]);
   }
-  Widget _getHighScoreListView(int categoryIndex){
+
+  Widget _getHighScoreListView(int categoryIndex) {
     _selectSorting(categoryIndex);
     List<Widget> widgets = new List();
     for (var i = 0; i < widget.users.length; i++) {
-      widgets.add(HighScoreEntry(widget.users[i], i));
+      widgets.add(GestureDetector(
+          onTap: () {
+            debugPrint('OPen profile');
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return ProfileView(widget.users[i]);
+                });
+          },
+          child: HighScoreEntry(widget.users[i], i)));
     }
     return Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5), //Theme.of(context).colorScheme.background,
-              margin: EdgeInsets.symmetric(horizontal: 20), 
-              child: ListView(children: widgets));
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        color: Theme.of(context)
+            .scaffoldBackgroundColor
+            .withOpacity(0.5), //Theme.of(context).colorScheme.background,
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        child: ListView(children: widgets));
   }
+
   void _selectSorting(int index) {
     widget.users.forEach((element) {
       element.setDisplayedCategory(index);
@@ -84,7 +98,7 @@ class _HighScoreListState extends State<HighScoreList> {
       });
     }
     //setState(() {
-      //this._selectedIndex = index;
+    //this._selectedIndex = index;
     //});
   }
 }
@@ -108,9 +122,7 @@ class HighScoreEntry extends StatelessWidget {
               child: CircleAvatar(
                   backgroundColor: user.color,
                   child: Text(user.getStringAvatar()))),
-          Spacer(
-
-          ),
+          Spacer(),
           Expanded(
               flex: 4,
               child: Text('${user.name}',

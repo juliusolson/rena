@@ -22,8 +22,8 @@ class _PinsViewState extends State<PinsView> {
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       Flexible(
-          flex: 1,
           child: ListView.builder(
+              shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: widget.categories.length,
               itemBuilder: (BuildContext ctx, int index) {

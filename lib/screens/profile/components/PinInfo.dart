@@ -11,7 +11,21 @@ class PinInfo extends StatelessWidget {
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           Stack(children: [
+            //Column(children: [
             Image(image: AssetImage(pinData.imageURL)),
+            //   Align(
+            //       alignment: Alignment.bottomCenter,
+            //       child: Container(
+            //           padding: EdgeInsets.all(5),
+            //           decoration: BoxDecoration(
+            //             shape: BoxShape.circle,
+            //             color: Colors.deepPurple[500],
+            //           ),
+            //           child: Text(
+            //             'x${pinData.repeats}',
+            //             style: Theme.of(context).textTheme.headline2,
+            //           )))
+            // ]),
             Align(alignment: Alignment.topRight, child: CloseButton())
           ]),
           Flexible(

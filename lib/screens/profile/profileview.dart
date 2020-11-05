@@ -15,9 +15,7 @@ class ProfileView extends StatelessWidget {
       body: Center(
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          
-          Text('Topplista',
-                  style: Theme.of(context).textTheme.bodyText1),
+          Text('Topplista', style: Theme.of(context).textTheme.bodyText1),
           Flexible(
               flex: 1,
               child: ChangeNotifierProvider<ProfileDummyData>(
@@ -27,18 +25,24 @@ class ProfileView extends StatelessWidget {
                     return HighScoreList(value.userProfiles);
                   }))),
           Text(
-                'Pins',
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
+            'Pins',
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
           Flexible(
               flex: 1,
               child: PinsView(['Streaks', 'Sparmål', 'Interaktion', 'Övrigt'])),
-          TextButton(onPressed: (){showDialog(
-            context: context,
-             builder:(BuildContext ctx2){
-               return ProfileFeedView();
-               });},
-                child: Text('PROFILE TEST'))
+          TextButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext ctx2) {
+                      return ProfileFeedView();
+                    });
+              },
+              child: Text(
+                'PROFILE TEST',
+                style: Theme.of(context).textTheme.headline2,
+              ))
         ]),
       ),
     );
