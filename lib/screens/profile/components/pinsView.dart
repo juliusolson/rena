@@ -3,9 +3,7 @@ import 'package:rena/models/pin.dart';
 import 'package:rena/screens/profile/components/PinInfo.dart';
 
 class PinsView extends StatefulWidget {
-  final List<String> categories;
   final Pins pins = new Pins();
-  PinsView(this.categories);
   @override
   _PinsViewState createState() => _PinsViewState();
 }
@@ -22,20 +20,21 @@ class _PinsViewState extends State<PinsView> {
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       Flexible(
+          flex: 1,
           child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: widget.categories.length,
+              itemCount: widget.pins.pinCategories.length,
               itemBuilder: (BuildContext ctx, int index) {
                 return TextButton(
-                    child: Text(widget.categories[index],
+                    child: Text(widget.pins.pinCategories[index],
                         style: (this._selectedIndex != index)
                             ? Theme.of(context).textTheme.headline2
                             : Theme.of(context).textTheme.headline3),
-                    onPressed: () => _selected(context, index));
+                    onPressed: () => _selected(index));
               })),
       Flexible(
-          flex: 5,
+          flex: 4,
           child: GridView.builder(
               itemCount: widget.pins.pins.length,
               gridDelegate:
@@ -68,7 +67,7 @@ class _PinsViewState extends State<PinsView> {
     return result;
   }
 
-  void _selected(BuildContext context, int index) {
+  void _selected(int index) {
     setState(() {
       _selectedIndex = index;
     });

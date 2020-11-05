@@ -63,12 +63,12 @@ class ProfileDummyData extends ChangeNotifier {
     'Emma'
   ];
   static final List<Color> colors = [
-    Colors.black,
-    Colors.lightBlue,
-    Colors.blue,
-    Colors.green,
-    Colors.yellow,
-    Colors.orange
+    Color(0xFFED1E79),
+    Color(0xFFFBAE17),
+    Color(0xFFF15A24),
+    Color(0xFF7EC5FF),
+    Color(0xFF8333FF),
+    Color(0xFF00D3b3)
   ];
   List<ProfileEntry> userProfiles;
 

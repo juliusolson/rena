@@ -118,6 +118,7 @@ class HighScoreEntry extends StatelessWidget {
               flex: 1,
               child: CircleAvatar(
                   backgroundColor: user.color,
+                  foregroundColor: Colors.white,
                   child: Text(user.getStringAvatar()))),
           Spacer(),
           Expanded(

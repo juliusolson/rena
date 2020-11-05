@@ -1,6 +1,7 @@
 import 'dart:math';
 
 class Pins {
+  List<String> pinCategories = ['Streaks', 'Sparmål', 'Interaktion', 'Övrigt'];
   List<Pin> pins = [
     Pin(
         'Spelfri i 7 dagar',
@@ -29,7 +30,7 @@ class Pins {
         'images/streak_100d-512.png')
   ];
   Pins() {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 11; i++) {
       pins.add(Pin.dummy());
     }
   }
@@ -44,12 +45,10 @@ class Pin {
   Pin(this.title, this.description, this.dateAcquired, this.imageURL);
 
   factory Pin.dummy() {
-    Random rng = new Random();
-    String date = rng.nextBool() ? '2020-10-02' : null;
     Pin pin = new Pin(
         'Spelfri i 100 dagar',
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
-        date,
+        null,
         'images/streak_100d-512.png');
 
     return pin;
