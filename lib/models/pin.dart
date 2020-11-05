@@ -50,7 +50,7 @@ class Pin {
         'Spelfri i 100 dagar',
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
         date,
-        'images/medal.png');
+        'images/streak_100d-512.png');
 
     return pin;
   }
