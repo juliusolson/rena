@@ -17,11 +17,12 @@ class _PromisesViewState extends State<PromisesView> {
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           Row(children: [
-            Text('Mina löften',
-                textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.headline1),
-            Align(
-                alignment: Alignment.bottomRight,
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text('Mina löften',
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).textTheme.headline1)),
+            Expanded(
                 child: GestureDetector(
                     onTap: () {
                       showDialog(
@@ -33,26 +34,26 @@ class _PromisesViewState extends State<PromisesView> {
                           });
                     },
                     child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20),
                         decoration: new BoxDecoration(
                             shape: BoxShape.circle,
                             color: Theme.of(context).highlightColor),
                         child: Icon(Icons.add, size: 50)))),
-            GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext ctx) {
-                        Widget dialog = EditPromisesDialog();
-                        return ChangeNotifierProvider<Promises>.value(
-                            value: promises, child: dialog);
-                      });
-                },
-                child: Container(
-                    decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Theme.of(context).highlightColor),
-                    child: Icon(Icons.edit, size: 50)))
+            Expanded(
+                child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext ctx) {
+                            Widget dialog = EditPromisesDialog();
+                            return ChangeNotifierProvider<Promises>.value(
+                                value: promises, child: dialog);
+                          });
+                    },
+                    child: Container(
+                        decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Theme.of(context).highlightColor),
+                        child: Icon(Icons.edit, size: 50))))
           ]),
           Flexible(
               flex: 4,
@@ -134,7 +135,9 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
                       style: Theme.of(context).textTheme.caption,
                     )),
                 Flexible(
+                    flex: 2,
                     child: Container(
+                        padding: EdgeInsets.all(10),
                         decoration: new BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             border:
@@ -162,8 +165,12 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
                     child: TextButton(
                         onPressed: () {
                           savePromise(context);
+                          Navigator.pop(context);
                         },
-                        child: Text('Spara')))
+                        child: Text(
+                          'Spara',
+                          style: Theme.of(context).textTheme.caption,
+                        )))
               ],
             ),
             Align(alignment: Alignment.topRight, child: CloseButton())

@@ -19,13 +19,13 @@ class _ChallengesState extends State<Challenges> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       Align(
           alignment: Alignment.topLeft,
-          child:
-              Text('Utmaningar', style: Theme.of(context).textTheme.headline1)),
+          child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Utmaningar',
+                  style: Theme.of(context).textTheme.headline1))),
       Flexible(
           flex: 7,
           child: PageView.builder(
@@ -39,7 +39,7 @@ class _ChallengesState extends State<Challenges> {
               itemBuilder: (BuildContext ctx, int index) {
                 return Column(children: [
                   Text(_challenges[index].category,
-                      style: Theme.of(context).textTheme.headline2),
+                      style: Theme.of(context).textTheme.bodyText1),
                   Expanded(
                       child: ChallengesViewChallengeWidget(_challenges[index]))
                 ]);
@@ -56,7 +56,7 @@ class _ChallengesState extends State<Challenges> {
                     'Generera nya',
                     style: Theme.of(context).textTheme.caption,
                   ))))
-    ]));
+    ]);
   }
 
   void onCategorySelect() {
@@ -84,7 +84,6 @@ class ChallengesViewChallengeWidget extends StatelessWidget {
         child: Container(
             margin: EdgeInsets.symmetric(vertical: 7),
             decoration: new BoxDecoration(
-                //color: (challengeData.completed) ? Colors.green : Colors.red,
                 border: Border.all(color: Theme.of(context).hintColor),
                 shape: BoxShape.circle),
             alignment: Alignment.center,

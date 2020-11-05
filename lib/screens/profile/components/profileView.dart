@@ -14,6 +14,12 @@ class _ProfileViewState extends State<ProfileView> {
   int _selectedIndex = 1;
   @override
   Widget build(BuildContext context) {
+    TextStyle themeActive = Theme.of(context).textTheme.bodyText1;
+
+    TextStyle themeInactive = themeActive.copyWith(
+      color: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.6),
+    );
+
     return Card(
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
@@ -40,9 +46,7 @@ class _ProfileViewState extends State<ProfileView> {
                 },
                 child: Text(
                   'Pins',
-                  style: (_selectedIndex == 0)
-                      ? Theme.of(context).textTheme.headline3
-                      : Theme.of(context).textTheme.headline2,
+                  style: (_selectedIndex == 0) ? themeActive : themeInactive,
                 )),
             TextButton(
                 onPressed: () {
@@ -50,14 +54,14 @@ class _ProfileViewState extends State<ProfileView> {
                 },
                 child: Text(
                   'Inlägg',
-                  style: (_selectedIndex == 1)
-                      ? Theme.of(context).textTheme.headline3
-                      : Theme.of(context).textTheme.headline2,
+                  style: (_selectedIndex == 1) ? themeActive : themeInactive,
                 ))
           ]),
           Expanded(
               flex: 2,
-              child: (_selectedIndex == 0) ? PinsView() : ProfileFeedView())
+              child: (_selectedIndex == 0)
+                  ? PinsView()
+                  : ProfileFeedView(widget.user))
         ],
       ),
     );

@@ -33,11 +33,11 @@ class _EditPromisesDialogState extends State<EditPromisesDialog> {
                     return (EditPromiseCard(promises.promises[index]));
                   });
             })),
-            Container(
-                decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Theme.of(context).highlightColor),
-                child: TextButton(onPressed: () {}, child: Text('Spara')))
+            // Container(
+            //     decoration: new BoxDecoration(
+            //         borderRadius: BorderRadius.circular(30),
+            //         color: Theme.of(context).highlightColor),
+            //     child: TextButton(onPressed: () {}, child: Text('Spara')))
           ]),
           Align(alignment: Alignment.topRight, child: CloseButton())
         ]));
