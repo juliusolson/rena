@@ -31,18 +31,18 @@ class ProfileView extends StatelessWidget {
           Flexible(
               flex: 1,
               child: PinsView(['Streaks', 'Sparmål', 'Interaktion', 'Övrigt'])),
-          TextButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext ctx2) {
-                      return ProfileFeedView();
-                    });
-              },
-              child: Text(
-                'PROFILE TEST',
-                style: Theme.of(context).textTheme.headline2,
-              ))
+          // TextButton(
+          //     onPressed: () {
+          //       showDialog(
+          //           context: context,
+          //           builder: (BuildContext ctx2) {
+          //             return ProfileFeedView();
+          //           });
+          //     },
+          //     child: Text(
+          //       'PROFILE TEST',
+          //       style: Theme.of(context).textTheme.headline2,
+          //     ))
         ]),
       ),
     );

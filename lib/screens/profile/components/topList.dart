@@ -64,7 +64,7 @@ class _HighScoreListState extends State<HighScoreList> {
     for (var i = 0; i < widget.users.length; i++) {
       widgets.add(GestureDetector(
           onTap: () {
-            debugPrint('OPen profile');
+            debugPrint('Open profile');
             showDialog(
                 context: context,
                 builder: (context) {
@@ -97,9 +97,6 @@ class _HighScoreListState extends State<HighScoreList> {
         return b.numberOfPins.compareTo(a.numberOfPins);
       });
     }
-    //setState(() {
-    //this._selectedIndex = index;
-    //});
   }
 }
 
@@ -132,19 +129,7 @@ class HighScoreEntry extends StatelessWidget {
               child: Text('${user.getDisplayedCategory()}',
                   style: Theme.of(context).textTheme.caption)),
           Expanded(
-              flex: 1,
-              child: user.isCurrentUser
-                  ? Text('')
-                  : TextButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext ctx2) {
-                              return SendPeppDialog(user.name);
-                            });
-                      },
-                      child: Text('\u{1F4AA}',
-                          style: Theme.of(context).textTheme.bodyText1)))
+              flex: 1, child: user.isCurrentUser ? Text('') : PeppButton(user))
         ]));
   }
 }
@@ -188,15 +173,48 @@ class SendPeppDialog extends StatelessWidget {
                             ],
                           )),
                       Flexible(
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                '\u{1F4AA}',
-                                style: TextStyle(fontSize: 50),
-                              )))
+                          child:
+                              Text('\u{1F4AA}', style: TextStyle(fontSize: 50)))
                     ])),
                 Align(alignment: Alignment.topRight, child: CloseButton()),
               ])))
     ]));
+  }
+}
+
+class PeppButton extends StatefulWidget {
+  ProfileEntry user;
+  PeppButton(this.user);
+  @override
+  _PeppButtonState createState() => _PeppButtonState();
+}
+
+class _PeppButtonState extends State<PeppButton> {
+  bool _pressed = false;
+  @override
+  Widget build(BuildContext context) {
+    Widget peppIcon = TextButton(
+        onPressed: () {
+          if (!_pressed) {
+            showDialog(
+                context: context,
+                builder: (BuildContext ctx2) {
+                  return SendPeppDialog(widget.user.name);
+                });
+          }
+          setState(() {
+            _pressed = true;
+          });
+        },
+        child: Text(
+          '\u{1F4AA}',
+          style: TextStyle(fontSize: 28),
+        ));
+    if (_pressed) {
+      peppIcon = ColorFiltered(
+          colorFilter: ColorFilter.mode(Colors.grey, BlendMode.srcATop),
+          child: peppIcon);
+    }
+    return peppIcon;
   }
 }
