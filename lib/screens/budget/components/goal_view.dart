@@ -6,11 +6,13 @@ import 'package:rena/models/goalmodel.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class GoalView extends StatelessWidget {
-  final Goal goal;
-  GoalView(this.goal);
+  final int index;
+  final Goals goals;
+  GoalView(this.index, this.goals);
 
   @override
   Widget build(BuildContext context) {
+    Goal goal = this.goals.goals[index];
     return SafeArea(
         child: Card(
             color: Theme.of(context).scaffoldBackgroundColor,
@@ -21,8 +23,8 @@ class GoalView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(bottom: 300.0),
-                      alignment: Alignment.centerRight,
+                        padding: EdgeInsets.only(bottom: 300.0),
+                        alignment: Alignment.centerRight,
                         child: CloseButton(
                           color: Colors.blue,
                         )),
@@ -94,7 +96,7 @@ class GoalView extends StatelessWidget {
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext ctx2) =>
-                                        GoalModify(goal));
+                                        GoalModify(index, this.goals));
                               },
                               child: Text(
                                 "Ändra",

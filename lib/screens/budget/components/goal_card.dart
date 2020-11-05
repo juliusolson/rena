@@ -11,6 +11,7 @@ class GoalCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
+        color: goal.amount == goal.saved ? Colors.grey : null,
           border: Border.all(color: Theme.of(context).shadowColor, width: 2),
           borderRadius: BorderRadius.circular(20),
           boxShadow: []),

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum GoalType {
   Dream,
   Treat,
@@ -55,3 +57,25 @@ List<Goal> dummyGoals = [
       13000,
       GoalType.Dream),
 ];
+
+class Goals extends ChangeNotifier {
+  List<Goal> goals;
+  Goals() {
+    this.goals = dummyGoals;
+  }
+
+  void addGoal(Goal g) {
+    this.goals.add(g);
+    this.notifyListeners();
+  }
+
+  void deleteGoal(Goal g) {
+    this.goals.remove(g);
+    notifyListeners();
+  }
+
+  void updateGoal(Goal g, int index) {
+    this.goals[index] = g;
+    notifyListeners();
+  }
+}

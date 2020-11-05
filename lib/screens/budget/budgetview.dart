@@ -5,6 +5,7 @@ import 'components/goal_card.dart';
 import 'components/goal_creation.dart';
 import 'components/goal_view.dart';
 import 'package:rena/models/goalmodel.dart';
+import 'package:provider/provider.dart';
 
 class Category {
   final String label;
@@ -26,19 +27,18 @@ class BudgetView extends StatefulWidget {
 }
 
 class _BudgetViewState extends State<BudgetView> {
-  int _itemCount;
   int _selectedIndex;
   GoalType _selectedCategory;
+
+  Goals goals = new Goals();
 
   void initState() {
     super.initState();
     _selectedIndex = 0;
     _selectedCategory = widget.categories[0].type;
-    _itemCount =
-        dummyGoals.where((element) => element.type == _selectedCategory).length;
   }
 
-  void _select(BuildContext ctx, int index) {
+  void _select(int index) {
     setState(() {
       _selectedIndex = index;
       _selectedCategory = widget.categories[index].type;
@@ -53,87 +53,104 @@ class _BudgetViewState extends State<BudgetView> {
       color: Theme.of(context).textTheme.headline2.color.withOpacity(0.6),
     );
     return SafeArea(
-      child: Center(
-        child: Column(
-          children: [
-            Flexible(
-              flex: 2,
-              child: BudgetOverview(),
-            ),
-            Flexible(
-                flex: 3,
-                child: Column(children: [
+      child: ChangeNotifierProvider<Goals>.value(
+          value: this.goals,
+          builder: (context, child) {
+            return Center(
+              child: Column(
+                children: [
                   Flexible(
-                    flex: 1,
-                    child: Row(
-                      //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                            flex: 2,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: this.widget.categories.length,
-                              itemBuilder: (BuildContext ctx, int index) {
-                                return TextButton(
-                                  child: Text(
-                                    this.widget.categories[index].label,
-                                    style: (this._selectedIndex == index)
-                                        ? themeActive
-                                        : themeInactive,
-                                  ),
-                                  onPressed: () => _select(ctx, index),
-                                );
-                              },
-                            )),
-                        Flexible(
-                          flex: 1,
-                          child: Container(
-                            child: FloatingActionButton(
-                              child: Icon(Icons.add),
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext ctx2) {
-                                      return GoalCreation();
-                                    });
-                              },
-                              foregroundColor: Colors.white,
-                              backgroundColor:
-                                  createMaterialColor(Color(0xff00d3b3)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    flex: 2,
+                    child: BudgetOverview(),
                   ),
                   Flexible(
-                    flex: 3,
-                    child: Container(
-                      padding: EdgeInsets.only(top: 30, left: 10, right: 10),
-                      child: ListView.separated(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: _itemCount,
-                          separatorBuilder: (BuildContext ctx, int index) =>
-                              SizedBox(height: 20),
-                          itemBuilder: (BuildContext ctx, int idx) {
-                            Goal goal = dummyGoals
-                                .where((g) => g.type == _selectedCategory)
-                                .toList()[idx];
-                            return GestureDetector(
-                              onTap: () => showDialog(
-                                  context: context,
-                                  builder: (BuildContext ctx2) {
-                                    return GoalView(goal);
-                                  }),
-                              child: GoalCard(goal),
-                            );
-                          }),
-                    ),
-                  )
-                ]))
-          ],
-        ),
-      ),
+                      flex: 3,
+                      child: Column(children: [
+                        Flexible(
+                          flex: 1,
+                          child: Row(
+                            //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                  flex: 2,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: this.widget.categories.length,
+                                    itemBuilder: (BuildContext ctx, int index) {
+                                      return TextButton(
+                                        child: Text(
+                                          this.widget.categories[index].label,
+                                          style: (this._selectedIndex == index)
+                                              ? themeActive
+                                              : themeInactive,
+                                        ),
+                                        onPressed: () => _select(index),
+                                      );
+                                    },
+                                  )),
+                              Flexible(
+                                flex: 1,
+                                child: Container(
+                                  child: FloatingActionButton(
+                                    child: Icon(Icons.add),
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (_) {
+                                            return GoalCreation(
+                                                data: Provider.of<Goals>(
+                                                    context));
+                                          });
+                                    },
+                                    foregroundColor: Colors.white,
+                                    backgroundColor:
+                                        createMaterialColor(Color(0xff00d3b3)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Flexible(
+                          flex: 3,
+                          child: Container(
+                            padding:
+                                EdgeInsets.only(top: 30, left: 10, right: 10),
+                            child: Consumer<Goals>(
+                                builder: (context, goals, child) {
+                              return ListView.separated(
+                                  physics: BouncingScrollPhysics(),
+                                  itemCount: goals.goals
+                                      .where((element) =>
+                                          element.type == _selectedCategory)
+                                      .toList()
+                                      .length,
+                                  separatorBuilder:
+                                      (BuildContext ctx, int index) =>
+                                          SizedBox(height: 20),
+                                  itemBuilder: (BuildContext context, int idx) {
+                                    Goal g = goals.goals
+                                        .where(
+                                            (g) => g.type == _selectedCategory)
+                                        .toList()[idx];
+                                    return GestureDetector(
+                                      onTap: () => showDialog(
+                                          context: context,
+                                          builder: (_) {
+                                            return GoalView(goals.goals.indexOf(g),
+                                                Provider.of<Goals>(context));
+                                          }),
+                                      child: GoalCard(g),
+                                    );
+                                  });
+                            }),
+                          ),
+                        ),
+                      ]))
+                ],
+              ),
+            );
+          }),
     );
   }
 }

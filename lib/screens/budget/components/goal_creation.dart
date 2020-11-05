@@ -1,8 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:rena/utils/colors.dart';
+import 'package:rena/models/goalmodel.dart';
 
-class GoalCreation extends StatelessWidget {
+class GoalCreation extends StatefulWidget {
+  Goals data;
+  GoalCreation({this.data});
+
+  @override
+  _GoalCreationState createState() => _GoalCreationState();
+}
+
+class _GoalCreationState extends State<GoalCreation> {
+  final nameController = TextEditingController();
+  final amountController = TextEditingController();
+  final descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    amountController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  _saveNewGoal(BuildContext ctx) {
+    String name = nameController.text;
+    int amount = int.parse(amountController.text);
+    String description = descriptionController.text;
+
+    Goal g = Goal(name, description, amount, 0, amount > 5000 ? GoalType.Dream : GoalType.Treat);
+    this.widget.data.addGoal(g);
+    Navigator.of(context).pop(this.widget);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,6 +72,7 @@ class GoalCreation extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
+                                      controller: nameController,
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                       decoration: InputDecoration(
@@ -62,6 +94,8 @@ class GoalCreation extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
+                                    keyboardType: TextInputType.number,
+                                      controller: amountController,
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                       decoration: InputDecoration(
@@ -84,6 +118,7 @@ class GoalCreation extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
+                                    controller: descriptionController,
                                       maxLines: 5,
                                       minLines: 5,
                                       style:
@@ -109,7 +144,7 @@ class GoalCreation extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius:
                                       new BorderRadius.circular(30.0)),
-                              onPressed: () {},
+                              onPressed: () => _saveNewGoal(context),
                               child: Text(
                                 "Spara",
                                 style: Theme.of(context).textTheme.caption,
