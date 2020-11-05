@@ -10,6 +10,8 @@ class PinsView extends StatefulWidget {
 
 class _PinsViewState extends State<PinsView> {
   int _selectedIndex;
+  PageController _pageController =
+      PageController(viewportFraction: 1, initialPage: 0);
   @override
   void initState() {
     super.initState();
@@ -31,16 +33,25 @@ class _PinsViewState extends State<PinsView> {
                         style: (this._selectedIndex != index)
                             ? Theme.of(context).textTheme.headline2
                             : Theme.of(context).textTheme.headline3),
-                    onPressed: () => _selected(index));
+                    onPressed: () => _pageController.jumpToPage(index));
               })),
       Flexible(
           flex: 4,
-          child: GridView.builder(
-              itemCount: widget.pins.pins.length,
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-              itemBuilder: (BuildContext ctx, int index) {
-                return this.getPinWidget(widget.pins.pins[index]);
+          child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (int pageIndex) {
+                _selected(pageIndex);
+              },
+              itemCount: widget.pins.pinCategories.length,
+              itemBuilder: (context, pageIndex) {
+                return GridView.builder(
+                    itemCount: widget.pins.pins[pageIndex].length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4),
+                    itemBuilder: (BuildContext ctx, int index) {
+                      return this
+                          .getPinWidget(widget.pins.pins[pageIndex][index]);
+                    });
               }))
     ]);
   }
