@@ -13,33 +13,43 @@ class HorizontalScrollSelector extends StatefulWidget {
 
 class _HorizontalScrollSelectorState extends State<HorizontalScrollSelector> {
   int _selectedIndex;
+  ScrollController controller;
   // Init by selecting most recent item i.e. the last
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.elements.length - 1;
+    controller = ScrollController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.jumpTo(controller.position.maxScrollExtent);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     TextStyle themeActive = Theme.of(context).textTheme.bodyText1;
     TextStyle themeNotActive = themeActive.copyWith(
-        color: Theme.of(context).accentColor,
-        decoration: TextDecoration.underline);
-    return ListView.builder(
-        physics: PageScrollPhysics(),
-        itemCount: widget.elements.length,
-        itemBuilder: (BuildContext ctx, int index) {
-          return Center(
-              child: Container(
-                  child: TextButton(
-                      child: Text(widget.elements[index],
-                          style: (this._selectedIndex != index)
-                              ? themeActive
-                              : themeNotActive),
-                      onPressed: () => _selected(context, index))));
-        },
-        scrollDirection: Axis.horizontal);
+      color: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.6),
+    );
+    return Container(
+        child: ListView.builder(
+            controller: controller,
+            physics: PageScrollPhysics(),
+            itemCount: widget.elements.length + 2,
+            itemBuilder: (BuildContext ctx, int index) {
+              return Center(
+                  child: Container(
+                      child: index < widget.elements.length
+                          ? TextButton(
+                              child: Text(widget.elements[index],
+                                  style: (this._selectedIndex == index)
+                                      ? themeActive
+                                      : themeNotActive),
+                              onPressed: () => _selected(context, index))
+                          : Text(" " * 15)));
+            },
+            scrollDirection: Axis.horizontal));
   }
 
   void _selected(BuildContext context, int index) {
