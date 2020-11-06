@@ -20,9 +20,15 @@ class ChallengesModel {
       Challenge('5 Situps', 'Fysisk'),
       Challenge('5 burpees', 'Fysisk')
     ],
-    categories[1]: [Challenge('Lorem Ipsum', 'Social'), Challenge('asdasd', 'Social')],
+    categories[1]: [
+      Challenge('Social 1', 'Social'),
+      Challenge('Social 2', 'Social'),
+      Challenge('Social 3', 'Social')
+    ],
     categories[2]: [
-      Challenge('dasdsa', 'Mental'),
+      Challenge('Mental 1', 'Mental'),
+      Challenge('Mental 1', 'Mental'),
+      Challenge('Mental 1', 'Mental'),
     ]
   };
 
@@ -38,6 +44,7 @@ class ChallengesModel {
     }
     return result;
   }
+
   List<Challenge> getRandomChallenges() {
     Random rng = new Random();
     List<Challenge> challenges;
