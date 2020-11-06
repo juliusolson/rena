@@ -28,4 +28,9 @@ class Promises extends ChangeNotifier {
     promises.remove(promise);
     notifyListeners();
   }
+
+  void editPromise(Promise promise, String newPromiseBody) {
+    promise.body = newPromiseBody;
+    notifyListeners();
+  }
 }
