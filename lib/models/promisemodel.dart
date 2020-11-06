@@ -12,8 +12,8 @@ class Promises extends ChangeNotifier {
   Promises() {
     promises = [];
     addPromise(
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua');
-    addPromise('bla bla bla bla');
+        'Här srkiver du dina anledningar till att vilja minska ditt spelande');
+    addPromise('Så du enkelt kan gå tillbaka och kolla på');
   }
 
   void addPromise(String promsiseBody) {
