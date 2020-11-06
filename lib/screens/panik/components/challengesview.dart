@@ -84,7 +84,7 @@ class ChallengesViewChallengeWidget extends StatelessWidget {
         child: Container(
             margin: EdgeInsets.symmetric(vertical: 7),
             decoration: new BoxDecoration(
-                border: Border.all(color: Theme.of(context).hintColor),
+                border: Border.all(color: Theme.of(context).buttonColor),
                 shape: BoxShape.circle),
             alignment: Alignment.center,
             child: Align(
@@ -100,43 +100,52 @@ class ChallengeDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        margin: EdgeInsets.all(10),
         color: Theme.of(context).scaffoldBackgroundColor,
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Stack(children: [
-            Align(alignment: Alignment.topRight, child: CloseButton()),
-            Container(
-                width: 400,
-                height: 350,
-                decoration: new BoxDecoration(
-                    border: Border.all(color: Theme.of(context).hintColor),
-                    shape: BoxShape.circle),
-                alignment: Alignment.center,
-                child: Text('${this.challengeData.title}',
-                    style: Theme.of(context).textTheme.bodyText1))
-          ]),
-          Align(
-              alignment: Alignment.topLeft,
-              child: Text('Utmaning',
-                  style: Theme.of(context).textTheme.headline1)),
-          Flexible(flex: 5, child: Text('${this.challengeData.description}')),
-          Flexible(
-              flex: 1,
-              child: GestureDetector(
-                  onTap: () {
-                    this.challengeData.completed = true;
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 70, vertical: 10),
-                    decoration: new BoxDecoration(
-                        color: Theme.of(context).highlightColor,
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    child: Text(
-                      'Avklarad',
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                  )))
-        ]));
+        child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Stack(children: [
+                    Align(alignment: Alignment.topRight, child: CloseButton()),
+                    Container(
+                        width: 400,
+                        height: 350,
+                        decoration: new BoxDecoration(
+                            border: Border.all(
+                                color: Theme.of(context).buttonColor),
+                            shape: BoxShape.circle),
+                        alignment: Alignment.center,
+                        child: Text('${this.challengeData.title}',
+                            style: Theme.of(context).textTheme.bodyText1))
+                  ]),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('Utmaning',
+                          style: Theme.of(context).textTheme.headline1)),
+                  Flexible(
+                      flex: 5,
+                      child: Text('${this.challengeData.description}')),
+                  Flexible(
+                      flex: 1,
+                      child: GestureDetector(
+                          onTap: () {
+                            this.challengeData.completed = true;
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 70, vertical: 10),
+                            decoration: new BoxDecoration(
+                                color: Theme.of(context).highlightColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: Text(
+                              'Avklarad',
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                          )))
+                ])));
   }
 }

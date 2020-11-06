@@ -67,7 +67,7 @@ class _PromisesViewState extends State<PromisesView> {
                               horizontal: 10, vertical: 10),
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  color: Theme.of(context).hintColor),
+                                  color: Theme.of(context).shadowColor),
                               borderRadius: BorderRadius.circular(15)),
                           child: Text(promises.promises[index].body,
                               style: Theme.of(context).textTheme.caption));
@@ -110,10 +110,11 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
                 Flexible(
                   child: Stack(children: [
                     Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
                         decoration: new BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             border: Border.all(
-                                color: Theme.of(context).hintColor))),
+                                color: Theme.of(context).shadowColor))),
                     Align(
                         alignment: Alignment.bottomRight,
                         child: Container(
@@ -123,25 +124,29 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
                                 color: Theme.of(context).highlightColor),
                             child: Icon(
                               Icons.edit,
-                              color: Theme.of(context).hintColor,
+                              color: Theme.of(context).buttonColor,
                               size: 50,
                             )))
                   ]),
                 ),
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      'Beskrivning',
-                      style: Theme.of(context).textTheme.caption,
-                    )),
+                    child: Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        child: Text(
+                          'Beskrivning',
+                          style: Theme.of(context).textTheme.caption,
+                        ))),
                 Flexible(
                     flex: 2,
                     child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
                         padding: EdgeInsets.all(10),
                         decoration: new BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            border:
-                                Border.all(color: Theme.of(context).hintColor)),
+                            border: Border.all(
+                                color: Theme.of(context).shadowColor)),
                         child: TextField(
                           decoration: InputDecoration(labelText: this.textBody),
                           onChanged: (String text) {

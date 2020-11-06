@@ -27,8 +27,8 @@ class ChallengesModel {
     ],
     categories[2]: [
       Challenge('Mental 1', 'Mental'),
-      Challenge('Mental 1', 'Mental'),
-      Challenge('Mental 1', 'Mental'),
+      Challenge('Mental 2', 'Mental'),
+      Challenge('Mental 3', 'Mental'),
     ]
   };
 

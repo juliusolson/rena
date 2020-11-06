@@ -55,7 +55,7 @@ class _EditPromiseCardState extends State<EditPromiseCard> {
         Container(
             margin: EdgeInsets.symmetric(horizontal: 10),
             decoration: new BoxDecoration(
-                color: Theme.of(context).hintColor, shape: BoxShape.circle),
+                color: Theme.of(context).shadowColor, shape: BoxShape.circle),
             child: IconButton(
               icon: Icon(Icons.delete_forever_outlined,
                   color: Theme.of(context).scaffoldBackgroundColor),
@@ -68,7 +68,7 @@ class _EditPromiseCardState extends State<EditPromiseCard> {
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: new BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Theme.of(context).hintColor)),
+                  border: Border.all(color: Theme.of(context).shadowColor)),
               child: Text(widget.promises.promises[widget.index].body)),
           Positioned(
               bottom: 0,
@@ -85,7 +85,7 @@ class _EditPromiseCardState extends State<EditPromiseCard> {
                       },
                       icon: Icon(
                         Icons.edit,
-                        color: Theme.of(context).hintColor,
+                        color: Theme.of(context).buttonColor,
                         size: 36,
                       ))))
         ])),
@@ -94,7 +94,7 @@ class _EditPromiseCardState extends State<EditPromiseCard> {
             child: IconButton(
               icon: Icon(
                 Icons.menu,
-                color: Theme.of(context).hintColor,
+                color: Theme.of(context).shadowColor,
               ),
               onPressed: () {},
             ))
@@ -158,7 +158,7 @@ class _PromiseEditDialogState extends State<PromiseEditDialog> {
                         decoration: new BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             border: Border.all(
-                                color: Theme.of(context).hintColor))),
+                                color: Theme.of(context).shadowColor))),
                     Align(
                         alignment: Alignment.bottomRight,
                         child: Container(
@@ -168,7 +168,7 @@ class _PromiseEditDialogState extends State<PromiseEditDialog> {
                                 color: Theme.of(context).highlightColor),
                             child: Icon(
                               Icons.edit,
-                              color: Theme.of(context).hintColor,
+                              color: Theme.of(context).buttonColor,
                               size: 50,
                             )))
                   ]),
@@ -185,8 +185,8 @@ class _PromiseEditDialogState extends State<PromiseEditDialog> {
                         padding: EdgeInsets.all(10),
                         decoration: new BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            border:
-                                Border.all(color: Theme.of(context).hintColor)),
+                            border: Border.all(
+                                color: Theme.of(context).shadowColor)),
                         child: TextField(
                           autofocus: true,
                           controller: _controller,
