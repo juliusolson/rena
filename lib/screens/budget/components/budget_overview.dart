@@ -75,26 +75,32 @@ class BudgetOverview extends StatelessWidget {
             ),
           ],
         ),
-        FlatButton(
-          color: createMaterialColor(Color(0xff00d3b3)),
-          textColor: Colors.white,
-          disabledColor: Colors.grey,
-          padding: EdgeInsets.all(8.0),
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0)),
-          onPressed: () {},
-          child: Text(
-            "    Ändra fördelning    ",
-            style: Theme.of(context).textTheme.caption,
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: 5, right: 5),
-          child: Divider(
-            thickness: 2.0,
-            color: Colors.grey,
-          ),
-        ),
+        // FlatButton(
+        //   color: createMaterialColor(Color(0xff00d3b3)),
+        //   textColor: Colors.white,
+        //   disabledColor: Colors.grey,
+        //   padding: EdgeInsets.all(8.0),
+        //   shape: RoundedRectangleBorder(
+        //       borderRadius: new BorderRadius.circular(30.0)),
+        //   onPressed: () {
+        //     showDialog(
+        //         context: context,
+        //         builder: (_) {
+        //           return BudgetChangeView();
+        //         });
+        //   },
+        //   child: Text(
+        //     "    Ändra fördelning    ",
+        //     style: Theme.of(context).textTheme.caption,
+        //   ),
+        // ),
+        // Container(
+        //   padding: EdgeInsets.only(left: 5, right: 5),
+        //   child: Divider(
+        //     thickness: 2.0,
+        //     color: Colors.grey,
+        //   ),
+        // ),
       ],
     ));
   }

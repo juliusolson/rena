@@ -6,6 +6,7 @@ import 'components/goal_creation.dart';
 import 'components/goal_view.dart';
 import 'package:rena/models/goalmodel.dart';
 import 'package:provider/provider.dart';
+import 'change-budget.dart';
 
 class Category {
   final String label;
@@ -62,7 +63,37 @@ class _BudgetViewState extends State<BudgetView> {
                 children: [
                   Flexible(
                     flex: 2,
-                    child: BudgetOverview(),
+                    child: Column(
+                      children: [
+                        BudgetOverview(),
+                        FlatButton(
+                          color: createMaterialColor(Color(0xff00d3b3)),
+                          textColor: Colors.white,
+                          disabledColor: Colors.grey,
+                          padding: EdgeInsets.all(8.0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (_) {
+                                  return BudgetChangeView(Provider.of<Goals>(context));
+                                });
+                          },
+                          child: Text(
+                            "    Ändra fördelning    ",
+                            style: Theme.of(context).textTheme.caption,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 5, right: 5),
+                          child: Divider(
+                            thickness: 2.0,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   Flexible(
                       flex: 3,
@@ -76,24 +107,28 @@ class _BudgetViewState extends State<BudgetView> {
                                   flex: 2,
                                   child: Stack(children: [
                                     Align(
-                                      alignment: Alignment.centerLeft,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: this.widget.categories.length,
-                                      itemBuilder:
-                                          (BuildContext ctx, int index) {
-                                        return TextButton(
-                                          child: Text(
-                                            this.widget.categories[index].label,
-                                            style:
-                                                (this._selectedIndex == index)
+                                        alignment: Alignment.centerLeft,
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount:
+                                              this.widget.categories.length,
+                                          itemBuilder:
+                                              (BuildContext ctx, int index) {
+                                            return TextButton(
+                                              child: Text(
+                                                this
+                                                    .widget
+                                                    .categories[index]
+                                                    .label,
+                                                style: (this._selectedIndex ==
+                                                        index)
                                                     ? themeActive
                                                     : themeInactive,
-                                          ),
-                                          onPressed: () => _select(index),
-                                        );
-                                      },
-                                    )),
+                                              ),
+                                              onPressed: () => _select(index),
+                                            );
+                                          },
+                                        )),
                                     Align(
                                         alignment: Alignment.bottomLeft,
                                         child: Container(
