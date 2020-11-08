@@ -20,7 +20,7 @@ class _PinsViewState extends State<PinsView> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle themeActive = Theme.of(context).textTheme.bodyText1;
+    TextStyle themeActive = Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20);
 
     TextStyle themeInactive = themeActive.copyWith(
       color: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.6),
