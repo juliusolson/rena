@@ -6,12 +6,12 @@ import 'package:rena/utils/colors.dart';
 class GoalCard extends StatelessWidget {
   final Goal goal;
   GoalCard(this.goal);
-  
+
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: goal.amount == goal.saved ? Colors.grey : null,
+          color: goal.amount == goal.saved ? Colors.grey : null,
           border: Border.all(color: Theme.of(context).shadowColor, width: 2),
           borderRadius: BorderRadius.circular(20),
           boxShadow: []),
@@ -31,7 +31,7 @@ class GoalCard extends StatelessWidget {
           LinearPercentIndicator(
             padding: EdgeInsets.only(left: 20, right: 20),
             lineHeight: 10.0,
-            percent: goal.saved/goal.amount,
+            percent: goal.saved / goal.amount,
             backgroundColor: Colors.grey,
             clipLinearGradient: true,
             linearGradient: LinearGradient(colors: [

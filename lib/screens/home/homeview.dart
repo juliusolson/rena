@@ -17,7 +17,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  String _selectedWidget = 'pie';
+  String _selectedWidget = 'bars';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,10 +69,9 @@ class _HomeViewState extends State<HomeView> {
             flex: 2,
             child: Container(
               child: Consumer<WeeklySpendingModel>(
-                builder: (context, model, child) {
-                  return SpendingsBarChart.withDummyData(model.data);
-                }
-              ),
+                  builder: (context, model, child) {
+                return SpendingsBarChart.withDummyData(model.data);
+              }),
             )),
         Flexible(
           flex: 4,

@@ -47,11 +47,12 @@ class _GoalModifyState extends State<GoalModify> {
         description,
         amount,
         this.widget.goals.goals[widget.index].saved,
-        amount > 5000 ? GoalType.Dream : GoalType.Treat);
+        amount > 5000 ? GoalType.Dream : GoalType.Treat,
+        0);
 
     this.widget.goals.updateGoal(g, widget.index);
     // And the award for ugliest hack of the year goes to:
-    for (int i =0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
       Navigator.of(this.context).pop();
     }
   }

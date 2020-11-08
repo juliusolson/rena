@@ -11,7 +11,9 @@ class Goal {
   int amount;
   int saved;
   GoalType type;
-  Goal(this.name, this.description, this.amount, this.saved, this.type);
+  int share;
+  Goal(this.name, this.description, this.amount, this.saved, this.type,
+      this.share);
 
   factory Goal.fromJson(Map<String, dynamic> json) {
     GoalType type;
@@ -31,6 +33,7 @@ class Goal {
       json["amount"] as int,
       json["saved"] as int,
       type,
+      json["share"] as int,
     );
   }
 
@@ -41,21 +44,23 @@ class Goal {
       "amount": this.amount,
       "saved": this.saved,
       "type": this.type == GoalType.Dream ? "dream" : "treat",
+      "share": this.share,
     };
   }
 }
 
 List<Goal> dummyGoals = [
-  Goal("Nya hörlurar", "Bose NC700", 1500, 300, GoalType.Treat),
-  Goal("Finmiddag", "Middag med familjen", 600, 100, GoalType.Treat),
+  Goal("Nya hörlurar", "Bose NC700", 1500, 300, GoalType.Treat, 25),
+  Goal("Finmiddag", "Middag med familjen", 600, 100, GoalType.Treat, 25),
   Goal("Macbook pro", "i7, 16 gb ram, 512 gb ssd, 13 tum", 30000, 15000,
-      GoalType.Dream),
+      GoalType.Dream, 25),
   Goal(
       "Resa till Mallorca",
       "Resa med familjen till Mallorca, bo på fint hotell och leva gott",
       20000,
       13000,
-      GoalType.Dream),
+      GoalType.Dream,
+      25),
 ];
 
 class Goals extends ChangeNotifier {

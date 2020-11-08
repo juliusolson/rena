@@ -18,6 +18,7 @@ class FieldWithLabel extends StatelessWidget {
           controller: this.controller,
           style: Theme.of(context).textTheme.bodyText1,
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 10.0, right:10.0, top: 1.0, bottom:1.0),
               suffixText: this.suffix.length > 0 ? this.suffix : null,
               labelStyle: Theme.of(context).textTheme.caption,
               enabledBorder: OutlineInputBorder(

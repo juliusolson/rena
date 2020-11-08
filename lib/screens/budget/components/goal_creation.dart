@@ -29,7 +29,8 @@ class _GoalCreationState extends State<GoalCreation> {
     int amount = int.parse(amountController.text);
     String description = descriptionController.text;
 
-    Goal g = Goal(name, description, amount, 0, amount > 5000 ? GoalType.Dream : GoalType.Treat);
+    Goal g = Goal(name, description, amount, 0,
+        amount > 5000 ? GoalType.Dream : GoalType.Treat, 0);
     this.widget.data.addGoal(g);
     Navigator.of(context).pop(this.widget);
   }
@@ -94,7 +95,7 @@ class _GoalCreationState extends State<GoalCreation> {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
-                                    keyboardType: TextInputType.number,
+                                      keyboardType: TextInputType.number,
                                       controller: amountController,
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
@@ -118,7 +119,7 @@ class _GoalCreationState extends State<GoalCreation> {
                                       style:
                                           Theme.of(context).textTheme.caption),
                                   TextFormField(
-                                    controller: descriptionController,
+                                      controller: descriptionController,
                                       maxLines: 5,
                                       minLines: 5,
                                       style:

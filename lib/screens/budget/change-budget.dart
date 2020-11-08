@@ -36,34 +36,51 @@ class _BudgetChangeViewState extends State<BudgetChangeView> {
                   child: Column(
                     children: [
                       Flexible(
+                          flex: 1,
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              child: CloseButton(
+                                color: Colors.blue,
+                              ))),
+                      Flexible(
+                          flex: 3,
                           //Header and form
                           child: Form(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Ändra fördelning"),
-                            Text("Budgetar"),
-                            FieldWithLabel(savingsController,
-                                label: "Veckospar",
-                                suffix: "kr",
-                                numeric: true),
-                            FieldWithLabel(spendingController,
-                                label: "Veckospel",
-                                suffix: "kr",
-                                numeric: true),
-                          ],
-                        ),
-                      )),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Ändra fördelning",
+                                  style: Theme.of(context).textTheme.headline1,
+                                ),
+                                Text("Budgetar", style: Theme.of(context).textTheme.bodyText1),
+                                FieldWithLabel(savingsController,
+                                    label: "Veckospar",
+                                    suffix: "kr",
+                                    numeric: true),
+                                FieldWithLabel(spendingController,
+                                    label: "Veckospel",
+                                    suffix: "kr",
+                                    numeric: true),
+                              ],
+                            ),
+                          )),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text("Fördelning av vekosparande", style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20)),
+                      ),
                       Flexible(
+                          flex: 4,
                           child: Container(
+                            padding: EdgeInsets.only(top:20),
                               child: ListView.separated(
                                   itemBuilder: (BuildContext context, int idx) {
-                                    return Stack(
-                                      children: [
+                                    List<Goal> goals = this.widget.data.goals;
+                                    return Stack(children: [
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Container(
-                                          margin: EdgeInsets.only(top:10),
+                                          // margin: EdgeInsets.only(top: 8),
                                           width: 100,
                                           height: 100,
                                           decoration: BoxDecoration(
@@ -77,15 +94,25 @@ class _BudgetChangeViewState extends State<BudgetChangeView> {
                                         ),
                                       ),
                                       Align(
-                                        alignment: Alignment.topRight,
+                                          alignment: Alignment.topRight,
                                           child: Container(
-                                            width: MediaQuery.of(context).size.width * 0.6,
-                                            child: FieldWithLabel(
-                                        TextEditingController(text: "hej"),
-                                        label: this.widget.data.goals[idx].name,
-                                        suffix: "%",
-                                        numeric: true,
-                                      )))
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.6,
+                                              child: FieldWithLabel(
+                                                TextEditingController(
+                                                    text: goals[idx]
+                                                        .share
+                                                        .toString()),
+                                                label: this
+                                                    .widget
+                                                    .data
+                                                    .goals[idx]
+                                                    .name,
+                                                suffix: "%",
+                                                numeric: true,
+                                              )))
                                     ]);
                                   },
                                   separatorBuilder: (context, index) {
@@ -96,7 +123,8 @@ class _BudgetChangeViewState extends State<BudgetChangeView> {
                                       .data
                                       .goals
                                       .length))), //GoalList
-                      RenaFlatButton("Spara", 200.0, () => {}),
+                      RenaFlatButton(
+                          "Spara", 200.0, () => {Navigator.of(context).pop()}),
                     ],
                   ),
                 ))));
