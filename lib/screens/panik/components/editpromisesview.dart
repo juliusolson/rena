@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rena/models/promisemodel.dart';
+import 'package:rena/theme/icons.dart';
 
 class EditPromisesDialog extends StatefulWidget {
   // final Promises promises;
@@ -93,7 +94,7 @@ class _EditPromiseCardState extends State<EditPromiseCard> {
             margin: EdgeInsets.symmetric(horizontal: 10),
             child: IconButton(
               icon: Icon(
-                Icons.menu,
+                CustomIcons.dot_3,
                 color: Theme.of(context).shadowColor,
               ),
               onPressed: () {},

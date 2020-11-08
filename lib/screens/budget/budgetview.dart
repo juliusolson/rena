@@ -77,7 +77,8 @@ class _BudgetViewState extends State<BudgetView> {
                             showDialog(
                                 context: context,
                                 builder: (_) {
-                                  return BudgetChangeView(Provider.of<Goals>(context));
+                                  return BudgetChangeView(
+                                      Provider.of<Goals>(context));
                                 });
                           },
                           child: Text(

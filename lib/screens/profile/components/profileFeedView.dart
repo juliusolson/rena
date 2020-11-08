@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rena/models/postModel.dart';
 import 'package:rena/models/scoreBoard.dart';
+import 'package:rena/theme/icons.dart';
 
 class ProfileFeedView extends StatefulWidget {
   PostsModel posts;
@@ -121,7 +122,7 @@ class PostHeader extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(postData.date)))
       ])),
-      Icon(Icons.menu)
+      Icon(CustomIcons.dot_3)
     ]);
   }
 }

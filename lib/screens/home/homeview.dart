@@ -59,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
                       lineHeight: 10.0,
                       percent: model.spending / 500.0,
                       backgroundColor: Colors.grey,
-                      progressColor: createMaterialColor(Color(0xfffed1e79)),
+                      progressColor: chartColors["purple"],
                     );
                   }),
                 ]),
