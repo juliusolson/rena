@@ -1,5 +1,4 @@
 import 'package:rena/models/scoreBoard.dart';
-import 'dart:math';
 
 class PostsModel {
   List<PostModel> posts;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rena/models/pin.dart';
 
 class PinInfo extends StatelessWidget {
-  Pin pinData;
+  final Pin pinData;
   PinInfo(this.pinData);
   @override
   Widget build(BuildContext context) {

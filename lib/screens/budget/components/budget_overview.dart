@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rena/utils/colors.dart';
 
 class BudgetOverview extends StatelessWidget {
   @override

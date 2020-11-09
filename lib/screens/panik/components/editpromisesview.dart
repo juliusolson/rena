@@ -122,7 +122,7 @@ class _EditPromiseCardState extends State<EditPromiseCard> {
 }
 
 class PromiseEditDialog extends StatefulWidget {
-  Promise promise;
+  final Promise promise;
   PromiseEditDialog(this.promise);
   @override
   _PromiseEditDialogState createState() => _PromiseEditDialogState();

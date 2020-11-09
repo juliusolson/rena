@@ -9,7 +9,7 @@ class Challenges extends StatefulWidget {
 }
 
 class _ChallengesState extends State<Challenges> {
-  int _selectedIndex;
+  //int _selectedIndex;
   List<Challenge> _challenges;
   @override
   void initState() {
@@ -69,7 +69,7 @@ class _ChallengesState extends State<Challenges> {
 }
 
 class ChallengesViewChallengeWidget extends StatelessWidget {
-  Challenge challengeData;
+  final Challenge challengeData;
   ChallengesViewChallengeWidget(this.challengeData);
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class ChallengesViewChallengeWidget extends StatelessWidget {
 }
 
 class ChallengeDialog extends StatelessWidget {
-  Challenge challengeData;
+  final Challenge challengeData;
   ChallengeDialog(this.challengeData);
   @override
   Widget build(BuildContext context) {
