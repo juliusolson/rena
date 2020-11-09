@@ -43,25 +43,28 @@ class _HighScoreListState extends State<HighScoreList> {
                           ? themeInactive
                           : themeActive),
                   onPressed: () {
-                    _pageController.animateToPage(index, curve: Curves.bounceIn, duration: Duration(milliseconds: 200));
+                    _pageController.animateToPage(index,
+                        curve: Curves.bounceIn,
+                        duration: Duration(milliseconds: 200));
                   },
                 );
               })),
       Flexible(
           flex: 3,
-          child: Scrollbar(child: PageView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: PageScrollPhysics(),
-              itemCount: widget.categories.length,
-              controller: _pageController,
-              onPageChanged: (int page) {
-                setState(() {
-                  this._selectedIndex = page;
-                });
-              },
-              itemBuilder: (BuildContext ctx, int index) {
-                return _getHighScoreListView(index);
-              })))
+          child: Scrollbar(
+              child: PageView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: PageScrollPhysics(),
+                  itemCount: widget.categories.length,
+                  controller: _pageController,
+                  onPageChanged: (int page) {
+                    setState(() {
+                      this._selectedIndex = page;
+                    });
+                  },
+                  itemBuilder: (BuildContext ctx, int index) {
+                    return _getHighScoreListView(index);
+                  })))
     ]);
   }
 

@@ -67,7 +67,7 @@ class _BudgetChangeViewState extends State<BudgetChangeView> {
                           )),
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text("Fördelning av vekosparande", style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20)),
+                        child: Text("Fördelning av veckosparande", style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20)),
                       ),
                       Flexible(
                           flex: 4,

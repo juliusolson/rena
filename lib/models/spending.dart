@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'dart:collection';
 import 'dart:math';
 
+import 'package:rena/theme/icons.dart';
+
 class WeeklySpending {
   final String week;
   final num spendings;
@@ -47,6 +49,14 @@ class WeeklySpendingModel extends ChangeNotifier {
   }
 }
 
+Map<String, IconData> categoryIconMap = {
+  "Spel": CustomIcons.dice,
+  "Boende": CustomIcons.home,
+  "Mat": CustomIcons.hamburger,
+  "Transport": CustomIcons.directions_bus,
+  "Övrigt": CustomIcons.dot_3,
+};
+
 class DummyData {
   static List<String> categories = [
     'Spel',
@@ -79,3 +89,11 @@ class DummyData {
     }
   }
 }
+
+Map<String, String> categoryColorMap = {
+  "Spel": "purple",
+  "Boende": "orange",
+  "Mat": "yellow",
+  "Transport": "blue",
+  "Övrigt": "pink",
+};
