@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rena/models/postModel.dart';
 import 'package:rena/models/scoreBoard.dart';
 import 'package:rena/screens/profile/components/pinsView.dart';
 import 'package:rena/screens/profile/components/profileFeedView.dart';
@@ -62,7 +63,7 @@ class _ProfileViewState extends State<ProfileView> {
               flex: 2,
               child: (_selectedIndex == 0)
                   ? PinsView()
-                  : ProfileFeedView(widget.user))
+                  : ProfileFeedView(PostsModel(widget.user)))
         ],
       ),
     );

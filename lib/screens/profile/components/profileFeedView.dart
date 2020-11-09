@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rena/models/postModel.dart';
-import 'package:rena/models/scoreBoard.dart';
 import 'package:rena/theme/icons.dart';
 
 class ProfileFeedView extends StatefulWidget {
-  PostsModel posts;
-  ProfileFeedView(ProfileEntry user) {
-    posts = new PostsModel(user);
-  }
+  final PostsModel posts;
+  ProfileFeedView(this.posts);
   @override
   _ProfileFeedViewState createState() => _ProfileFeedViewState();
 }
