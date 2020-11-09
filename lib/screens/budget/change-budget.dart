@@ -53,7 +53,9 @@ class _BudgetChangeViewState extends State<BudgetChangeView> {
                                   "Ändra fördelning",
                                   style: Theme.of(context).textTheme.headline1,
                                 ),
-                                Text("Budgetar", style: Theme.of(context).textTheme.bodyText1),
+                                Text("Budgetar",
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1),
                                 FieldWithLabel(savingsController,
                                     label: "Veckospar",
                                     suffix: "kr",
@@ -67,12 +69,16 @@ class _BudgetChangeViewState extends State<BudgetChangeView> {
                           )),
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text("Fördelning av veckosparande", style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20)),
+                        child: Text("Fördelning av veckosparande",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(fontSize: 20)),
                       ),
                       Flexible(
                           flex: 4,
                           child: Container(
-                            padding: EdgeInsets.only(top:20),
+                              padding: EdgeInsets.only(top: 20),
                               child: ListView.separated(
                                   itemBuilder: (BuildContext context, int idx) {
                                     List<Goal> goals = this.widget.data.goals;
@@ -84,6 +90,10 @@ class _BudgetChangeViewState extends State<BudgetChangeView> {
                                           width: 100,
                                           height: 100,
                                           decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: AssetImage(
+                                                      goals[idx].image)),
                                               border: Border.all(
                                                   color: Theme.of(context)
                                                       .shadowColor,
