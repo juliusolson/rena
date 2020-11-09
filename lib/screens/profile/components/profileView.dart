@@ -31,7 +31,8 @@ class _ProfileViewState extends State<ProfileView> {
             padding: EdgeInsets.symmetric(horizontal: 30),
             decoration: BoxDecoration(
                 border: Border.all(color: Theme.of(context).hintColor),
-                borderRadius: BorderRadius.circular(35)),
+                borderRadius: BorderRadius.circular(35),
+                image: widget.user.imageURL != null ? DecorationImage(image: AssetImage(widget.user.imageURL), fit: BoxFit.cover) : null,),
             child: Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(

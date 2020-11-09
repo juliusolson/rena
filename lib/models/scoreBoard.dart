@@ -9,6 +9,7 @@ class ProfileEntry {
   int displayedScore = 0;
   Color color = Colors.lightBlue;
   bool isCurrentUser = false;
+  String imageURL = 'images/profile_image.png';
   ProfileEntry(this.name, this.gamblingFreeDays, this.numberOfPins);
 
   String toString() {
@@ -16,8 +17,12 @@ class ProfileEntry {
   }
 
   //To be Removed. Ugly hack to easily change presented value when changing sorting mode of  high score
-  int getDisplayedCategory() {
-    return displayedScore;
+  int getDisplayedCategory(int categoryIndex) {
+    if (categoryIndex == 0) {
+      return gamblingFreeDays;
+    } else {
+      return numberOfPins;
+    }
   }
 
   void setDisplayedCategory(int index) {
@@ -79,10 +84,10 @@ class ProfileDummyData extends ChangeNotifier {
     notifyListeners();
   }
   List<ProfileEntry> _createDummyData(int numberOfUsers) {
-    Random rng = new Random();
+    Random rng = new Random(1338);
     List<ProfileEntry> users = new List(numberOfUsers);
     for (var i = 0; i < numberOfUsers; i++) {
-      String name = usernames[rng.nextInt(usernames.length)];
+      String name = usernames[i % usernames.length];
       users[i] = new ProfileEntry(name, rng.nextInt(100), rng.nextInt(30));
       users[i].color = colors[rng.nextInt(colors.length)];
     }
