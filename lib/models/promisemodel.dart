@@ -13,7 +13,8 @@ class Promises extends ChangeNotifier {
     promises = [];
     addPromise(
         'Här srkiver du dina anledningar till att vilja minska ditt spelande');
-    addPromise('Så du enkelt kan gå tillbaka och kolla på');
+    addPromise('Jag vill sluta spela så jag kan egna mer tid åt min familj och mina barn');
+    addPromise('Jag vill få bättre koll på min ekonomi');
   }
 
   void addPromise(String promsiseBody) {
