@@ -3,32 +3,33 @@ import 'dart:math';
 class Challenge {
   String title;
   String category;
+  String imageURL;
   String description =
       "Dags att göra 10 burpees! Hoppa upp med händerna över huvudet, ta dig ner till en djup armhävningsposition och hoppa upp igen. Variera övningen med attt göra en situp eller sidoplankan.";
   bool completed = false;
-  Challenge(this.title, this.category);
+  Challenge(this.title, this.category, this.imageURL);
 }
 
 class ChallengesModel {
   static final List<String> categories = ['Fysisk', 'Social', 'Mental'];
   Map<String, List<Challenge>> challengesMap = {
     categories[0]: [
-      Challenge('10 Pushups', 'Fysisk'),
-      Challenge('10 Situps', 'Fysisk'),
-      Challenge('10 burpees', 'Fysisk'),
-      Challenge('5 Pushups', 'Fysisk'),
-      Challenge('5 Situps', 'Fysisk'),
-      Challenge('5 burpees', 'Fysisk')
+      Challenge('10 Pushups', 'Fysisk', 'images/fysisk-utmaning2.jpg'),
+      Challenge('10 Situps', 'Fysisk', 'images/fysisk-utmaning2.jpg'),
+      Challenge('10 burpees', 'Fysisk', 'images/fysisk-utmaning2.jpg'),
+      Challenge('5 Pushups', 'Fysisk', 'images/fysisk-utmaning.jpg'),
+      Challenge('5 Situps', 'Fysisk', 'images/fysisk-utmaning.jpg'),
+      Challenge('5 burpees', 'Fysisk', 'images/fysisk-utmaning.jpg')
     ],
     categories[1]: [
-      Challenge('Social 1', 'Social'),
-      Challenge('Social 2', 'Social'),
-      Challenge('Social 3', 'Social')
+      Challenge('Social 1', 'Social', 'images/social-utmaning.jpg'),
+      Challenge('Social 2', 'Social', 'images/social-utmaning2.jpg'),
+      Challenge('Social 3', 'Social', 'images/social-utmaning.jpg')
     ],
     categories[2]: [
-      Challenge('Mental 1', 'Mental'),
-      Challenge('Mental 2', 'Mental'),
-      Challenge('Mental 3', 'Mental'),
+      Challenge('Mental 1', 'Mental', 'images/mental-utmaning.jpeg'),
+      Challenge('Mental 2', 'Mental', 'images/mental-utmaning.jpeg'),
+      Challenge('Mental 3', 'Mental', 'images/mental-utmaning.jpeg'),
     ]
   };
 

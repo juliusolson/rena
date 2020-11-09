@@ -96,10 +96,10 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
   Widget build(BuildContext context) {
     return Card(
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: Stack(
-          children: [
+        child: 
             Column(
               children: [
+                Align(alignment: Alignment.topRight, child: CloseButton()),
                 Align(
                     alignment: Alignment.topLeft,
                     widthFactor: 2,
@@ -178,9 +178,9 @@ class _PromiseCreationDialogState extends State<PromiseCreationDialog> {
                         )))
               ],
             ),
-            Align(alignment: Alignment.topRight, child: CloseButton())
-          ],
-        ));
+            
+          
+        );
   }
 
   void savePromise(BuildContext context) {

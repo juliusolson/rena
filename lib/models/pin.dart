@@ -31,7 +31,16 @@ class Pins {
           'images/streak_100d-512.png')
     ],
     [],
-    [],
+    [Pin(
+          'interaktions pin 1',
+          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
+          '2020-10-02',
+          'images/100participation-512.png'),
+          Pin(
+          'interaktions pin 1',
+          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
+          '2020-10-02',
+          'images/brain1-512.png')],
     []
   ];
   Pins() {

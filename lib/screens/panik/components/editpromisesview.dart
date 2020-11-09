@@ -20,8 +20,9 @@ class _EditPromisesDialogState extends State<EditPromisesDialog> {
   Widget build(BuildContext context) {
     return Card(
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: Stack(children: [
+        child: 
           Column(children: [
+            Align(alignment: Alignment.topRight, child: CloseButton()),
             Align(
                 alignment: Alignment.topLeft,
                 child: Text('Ändra löften',
@@ -35,8 +36,8 @@ class _EditPromisesDialogState extends State<EditPromisesDialog> {
                   });
             })),
           ]),
-          Align(alignment: Alignment.topRight, child: CloseButton())
-        ]));
+          
+        );
   }
 }
 
