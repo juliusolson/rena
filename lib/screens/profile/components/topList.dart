@@ -69,6 +69,7 @@ class _HighScoreListState extends State<HighScoreList> {
     _selectSorting(categoryIndex);
     List<Widget> widgets = new List();
     for (var i = 0; i < widget.users.length; i++) {
+      //debugPrint('$i : ${widget.users[i]}');
       widgets.add(GestureDetector(
           onTap: () {
             debugPrint('Open profile');
@@ -78,7 +79,7 @@ class _HighScoreListState extends State<HighScoreList> {
                   return ProfileView(widget.users[i]);
                 });
           },
-          child: HighScoreEntry(widget.users[i], i)));
+          child: HighScoreEntry(widget.users[i], i, categoryIndex)));
     }
     return Card(
         shape: RoundedRectangleBorder(
@@ -110,7 +111,8 @@ class _HighScoreListState extends State<HighScoreList> {
 class HighScoreEntry extends StatelessWidget {
   ProfileEntry user;
   int index;
-  HighScoreEntry(this.user, this.index);
+  int categoryIndex;
+  HighScoreEntry(this.user, this.index, this.categoryIndex);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -134,7 +136,7 @@ class HighScoreEntry extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText2)),
           Expanded(
               flex: 1,
-              child: Text('${user.getDisplayedCategory()}',
+              child: Text('${user.getDisplayedCategory(this.categoryIndex)}',
                   style: Theme.of(context).textTheme.caption)),
           Expanded(
               flex: 1, child: user.isCurrentUser ? Text('') : PeppButton(user))
