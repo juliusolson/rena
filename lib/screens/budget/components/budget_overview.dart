@@ -23,13 +23,13 @@ class BudgetOverview extends StatelessWidget {
                 onPressed: null,
                 child: Text(
                   "Spar",
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 20)
                 )),
             TextButton(
                 onPressed: null,
                 child: Text(
                   "Spel",
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 20),
                 )),
           ],
         ),

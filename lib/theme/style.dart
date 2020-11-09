@@ -64,11 +64,13 @@ ThemeData lightTheme() {
           fontSize: 30,
           color: Colors.black,
           fontFamily: "Montserrat",
+          fontWeight: FontWeight.w500,
         ),
         bodyText2: TextStyle(
           fontSize: 16,
           color: Colors.black,
           fontFamily: "Montserrat",
+          fontWeight: FontWeight.w500,
         ),
         caption: TextStyle(
           fontFamily: "Montserrat",
