@@ -1,4 +1,3 @@
-import 'dart:math';
 
 class Pins {
   static List<String> categoryDefaultURL = ['images/streak_100d-512.png', 'images/king_crown-512.png', 'images/anchor-512.png', 'images/brain2-512.png'];

@@ -4,7 +4,7 @@ import 'package:rena/utils/colors.dart';
 import 'package:rena/models/goalmodel.dart';
 
 class GoalCreation extends StatefulWidget {
-  Goals data;
+  final Goals data;
   GoalCreation({this.data});
 
   @override

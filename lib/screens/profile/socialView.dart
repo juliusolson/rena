@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rena/models/scoreBoard.dart';
 import 'package:rena/screens/profile/components/pinsView.dart';
-import 'package:rena/screens/profile/components/profileFeedView.dart';
 import 'package:rena/screens/profile/components/topList.dart';
 
 class SocialView extends StatelessWidget {

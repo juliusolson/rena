@@ -60,7 +60,7 @@ class _ProfileFeedViewState extends State<ProfileFeedView> {
 }
 
 class PostView extends StatelessWidget {
-  PostModel postData;
+  final PostModel postData;
   PostView(this.postData);
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,7 @@ class PostView extends StatelessWidget {
 }
 
 class PostHeader extends StatelessWidget {
-  PostModel postData;
+  final PostModel postData;
   PostHeader(this.postData);
   @override
   Widget build(BuildContext context) {
@@ -155,7 +155,7 @@ class _ReactionCounterState extends State<ReactionCounter> {
               //border: Border.all(color: Theme.of(context).hintColor),
               color: Colors.grey,
               borderRadius: BorderRadius.circular(10)),
-          child: Text('${widget.reactionEmoji} ${count}',
+          child: Text(widget.reactionEmoji+ " " +count.toString(),
               style: Theme.of(context).textTheme.caption),
         ));
   }

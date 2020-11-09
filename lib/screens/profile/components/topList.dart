@@ -3,8 +3,8 @@ import 'package:rena/models/scoreBoard.dart';
 import 'package:rena/screens/profile/components/profileView.dart';
 
 class HighScoreList extends StatefulWidget {
-  List<String> categories = ['Spelfria dagar', 'Pins'];
-  List<ProfileEntry> users;
+  final List<String> categories = ['Spelfria dagar', 'Pins'];
+  final List<ProfileEntry> users;
   HighScoreList(this.users);
   @override
   _HighScoreListState createState() => _HighScoreListState();
@@ -112,9 +112,9 @@ class _HighScoreListState extends State<HighScoreList> {
 }
 
 class HighScoreEntry extends StatelessWidget {
-  ProfileEntry user;
-  int index;
-  int categoryIndex;
+  final ProfileEntry user;
+  final int index;
+  final int categoryIndex;
   HighScoreEntry(this.user, this.index, this.categoryIndex);
   @override
   Widget build(BuildContext context) {
@@ -148,7 +148,7 @@ class HighScoreEntry extends StatelessWidget {
 }
 
 class SendPeppDialog extends StatelessWidget {
-  String name;
+  final String name;
   SendPeppDialog(this.name);
   @override
   Widget build(BuildContext context) {
@@ -196,7 +196,7 @@ class SendPeppDialog extends StatelessWidget {
 }
 
 class PeppButton extends StatefulWidget {
-  ProfileEntry user;
+  final ProfileEntry user;
   PeppButton(this.user);
   @override
   _PeppButtonState createState() => _PeppButtonState();

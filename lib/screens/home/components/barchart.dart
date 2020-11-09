@@ -3,8 +3,6 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:rena/models/spending.dart';
 import 'dart:math' as math;
 
-import 'package:rena/utils/colors.dart';
-
 class SpendingsBarChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;

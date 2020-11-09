@@ -11,7 +11,6 @@ class SpendingsPieChart extends StatefulWidget {
   SpendingsPieChart(this.seriesList, {this.animate, this.data});
 
   factory SpendingsPieChart.customSampleData(List<SpendingCategory> data) {
-    List<String> categories = [];
     return new SpendingsPieChart(
       [
         new charts.Series<SpendingCategory, int>(
