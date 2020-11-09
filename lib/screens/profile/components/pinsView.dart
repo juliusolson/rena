@@ -63,6 +63,12 @@ class _PinsViewState extends State<PinsView> {
 
   Widget getPinWidget(Pin pinData) {
     Widget pinIcon, result;
+    const ColorFilter greyscale = ColorFilter.matrix(<double>[
+  0.2126, 0.7152, 0.0722, 0, 0,
+  0.2126, 0.7152, 0.0722, 0, 0,
+  0.2126, 0.7152, 0.0722, 0, 0,
+  0,      0,      0,      1, 0,
+]);
     if (pinData.isAcquied()) {
       pinIcon = Image.asset(pinData.imageURL);
       result = GestureDetector(
@@ -75,10 +81,10 @@ class _PinsViewState extends State<PinsView> {
           },
           child: pinIcon);
     } else {
-      result = ColorFiltered(
-        colorFilter: ColorFilter.mode(Colors.grey, BlendMode.srcATop),
+      result = Opacity(opacity: 0.3, child:  ColorFiltered(
+        colorFilter: greyscale,
         child: Image.asset(pinData.imageURL),
-      );
+      ));
     }
     return result;
   }

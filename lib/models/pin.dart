@@ -1,6 +1,7 @@
 import 'dart:math';
 
 class Pins {
+  static List<String> categoryDefaultURL = ['images/streak_100d-512.png', 'images/king_crown-512.png', 'images/anchor-512.png', 'images/brain2-512.png'];
   List<String> pinCategories = ['Streaks', 'Sparmål', 'Interaktion', 'Övrigt'];
   List<List<Pin>> pins = [
     [
@@ -37,16 +38,25 @@ class Pins {
           '2020-10-02',
           'images/100participation-512.png'),
           Pin(
-          'interaktions pin 1',
+          'interaktions pin 2',
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
           '2020-10-02',
-          'images/brain1-512.png')],
-    []
+          'images/hands1-512.png'),
+          Pin(
+          'interaktions pin 2',
+          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
+          '2020-10-02',
+          'images/muscle1-512.png')],
+    [Pin(
+          'Övrig pin 1',
+          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
+          '2020-10-02',
+          'images/brain1-512.png')]
   ];
   Pins() {
     for (var i = 0; i < 11; i++) {
       for (var j = 0; j < this.pinCategories.length; j++) {
-        pins[j].add(Pin.dummy());
+        pins[j].add(Pin.dummy(j));
       }
     }
   }
@@ -60,12 +70,12 @@ class Pin {
   int repeats = 2;
   Pin(this.title, this.description, this.dateAcquired, this.imageURL);
 
-  factory Pin.dummy() {
+  factory Pin.dummy(int j) {
     Pin pin = new Pin(
         'Spelfri i 100 dagar',
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod  tincidunt ut laoreet dolore magna aliquam',
         null,
-        'images/streak_100d-512.png');
+        Pins.categoryDefaultURL[j]);
 
     return pin;
   }
