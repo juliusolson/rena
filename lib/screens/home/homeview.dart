@@ -70,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
             child: Container(
               child: Consumer<WeeklySpendingModel>(
                   builder: (context, model, child) {
-                return SpendingsBarChart.withDummyData(model.data);
+                return SpendingsBarChart.withDummyData(model);
               }),
             )),
         Flexible(
