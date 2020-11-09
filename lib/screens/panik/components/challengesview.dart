@@ -85,11 +85,12 @@ class ChallengesViewChallengeWidget extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 7),
             decoration: new BoxDecoration(
                 border: Border.all(color: Theme.of(context).buttonColor),
+                image: challengeData.imageURL != null ? DecorationImage(image: AssetImage(challengeData.imageURL), fit: BoxFit.cover) : null,
                 shape: BoxShape.circle),
             alignment: Alignment.center,
             child: Align(
                 alignment: Alignment.center,
-                child: Text(challengeData.title,
+                child:Text(challengeData.title,
                     style: Theme.of(context).textTheme.bodyText1))));
   }
 }
@@ -115,6 +116,7 @@ class ChallengeDialog extends StatelessWidget {
                         decoration: new BoxDecoration(
                             border: Border.all(
                                 color: Theme.of(context).buttonColor),
+                            image: challengeData.imageURL != null ? DecorationImage(image: AssetImage(challengeData.imageURL), fit: BoxFit.cover) : null,
                             shape: BoxShape.circle),
                         alignment: Alignment.center,
                         child: Text('${this.challengeData.title}',
